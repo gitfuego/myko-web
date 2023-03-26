@@ -1,0 +1,24 @@
+{
+  "name": "myko-web",
+  "version": "1.0.0",
+  "description": "myko, where artists and fans connect",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MYKO-app/myko-web.git"
+  },
+  "author": "Firas Khansa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MYKO-app/myko-web/issues"
+  },
+  "homepage": "https://github.com/MYKO-app/myko-web#readme",
+  "dependencies": {
+    "next": "^13.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
