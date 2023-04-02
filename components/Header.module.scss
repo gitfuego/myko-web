@@ -25,20 +25,25 @@
   flex-direction: column;
   align-items: center;
 
-  & button {
-    all: unset;
-    height: 50px;
-    width: 100px;
-    color: white;
-    border: solid;
-    background: linear-gradient(to right, black, black) padding-box,
-    linear-gradient(to top right, $myko-blue, lightyellow, white) border-box;
-    border-radius: 23px;
-    border: 1px solid transparent;
-    text-align: center;
-    font-family: CircularSTD, Arial, Helvetica, sans-serif;
-    font-size: x-large;
-    padding: 10%;
+}
+
+.button {
+  all: unset;
+  height: 50px;
+  width: 130px;
+  color: white;
+  background: linear-gradient(to right, black, black) padding-box,
+  linear-gradient(to top right, $myko-blue, lightyellow, white) border-box;
+  border-radius: 23px;
+  border: 1px solid transparent;
+  text-align: center;
+  font-family: CircularSTD, Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  padding: 10%;
+  transition: box-shadow 300ms;
+  &:hover {
+    cursor: pointer;
+    box-shadow: $myko-blue 0px 0px 12px 3px;
     transition: box-shadow 300ms;
   }
 }

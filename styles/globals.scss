@@ -28,12 +28,6 @@ body {
   background-position: center;
 }
 
-button:hover {
-  cursor: pointer;
-  box-shadow: $myko-blue 0px 0px 10px;
-  transition: box-shadow 300ms;
-}
-
 .splash {
   font-family: HalvarBreit, Arial, Helvetica, sans-serif;
   color: $myko-blue;
@@ -96,11 +90,11 @@ a {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 15px;
+  border-radius: 20px;
   transition: box-shadow 300ms;
 
   &:hover {
     transition: box-shadow 300ms;
-    box-shadow: $myko-blue 0px 0px 10px;
+    box-shadow: $myko-blue 0px 0px 12px 3px;
   }
 }

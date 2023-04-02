@@ -24,30 +24,6 @@ export default function() {
           </a>
         </FadeIn>
       </section>
-      <section className="entrance-container">
-        <FadeIn direction={'left'}>
-          <a href="#">
-            <div className="rainbow-btn">I'M A FAN</div>
-          </a>
-        </FadeIn>
-        <FadeIn direction={'right'}>
-          <a href="#">
-          <div className="rainbow-btn">I'M AN ARTIST</div>
-          </a>
-        </FadeIn>
-      </section>
-      <section className="entrance-container">
-        <FadeIn direction={'left'}>
-          <a href="#">
-            <div className="rainbow-btn">I'M A FAN</div>
-          </a>
-        </FadeIn>
-        <FadeIn direction={'right'}>
-          <a href="#">
-          <div className="rainbow-btn">I'M AN ARTIST</div>
-          </a>
-        </FadeIn>
-      </section>
     </div>
   );
 };
