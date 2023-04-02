@@ -2,16 +2,7 @@ import FadeIn from "../components/FadeIn";
 
 export default function() {
   return (
-    <div className="background">
-      <header className="topContainer">
-        <div className="topSub"></div>
-        <div className="topSub">
-          <img className="logo" src="/mykoWhite.svg" />
-        </div>
-        <div className="topSub">
-          <button>LOGIN</button>
-        </div>
-      </header>
+    <div className="content">
       <section className="splash">
         <div className="landing-text">
           <div className="main">Where artists and their top listeners hangout.</div>
