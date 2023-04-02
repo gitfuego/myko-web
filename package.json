@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/MYKO-app/myko-web#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.15",
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

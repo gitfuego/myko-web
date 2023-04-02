@@ -11,12 +11,14 @@
 $myko-blue: #ACF2FA;
 
 body {
+  height: 100%;
   box-sizing: border-box;
   width: 100%;
-  height: max-content;
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 .background {
@@ -27,6 +29,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -43,7 +48,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2vh 0;
+  padding: 3vh 0;
 }
 
 .topSub {
@@ -66,14 +71,16 @@ body {
     border: 1px solid transparent;
     text-align: center;
     font-family: CircularSTD, Arial, Helvetica, sans-serif;
-    font-size: larger;
-    padding: 7%;
+    font-size: x-large;
+    padding: 10%;
+    transition: box-shadow 300ms;
   }
 }
 
 button:hover {
   cursor: pointer;
   box-shadow: $myko-blue 0px 0px 10px;
+  transition: box-shadow 300ms;
 }
 
 .splash {
@@ -97,6 +104,7 @@ button:hover {
 
   & .main {
     font-size: 50px;
+    margin: 5% 0;
   }
 
   & .sub {
@@ -108,4 +116,40 @@ button:hover {
   width: 80%;
   -webkit-filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
   filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
+}
+
+.entrance-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 2% 0;
+  width: 80%;
+
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+.rainbow-btn {
+  color: black;
+  text-decoration: none;
+  font-family: CircularSTD, Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 18cqmax;
+  height: 5cqmax;
+  background-image: url('/rainbowButton.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  transition: box-shadow 300ms;
+
+  &:hover {
+    transition: box-shadow 300ms;
+    box-shadow: $myko-blue 0px 0px 10px;
+  }
 }
