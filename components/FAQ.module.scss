@@ -1,0 +1,43 @@
+@import '../styles/variables';
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  margin: 10% 0px;
+}
+
+.faqSelect {
+  background-color: unset;
+  border: unset;
+  color: $myko-blue;
+}
+
+.faq, .faqSelect {
+  font-family: HalvarBreit, Arial, Helvetica, sans-serif;
+  font-size: 100px;
+  text-align: center;
+}
+
+.faq {
+  color: white;
+}
+
+.accContainer {
+  padding: 20px 0px;
+  font-family: HalvarBreit, Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
+.question {
+  color: $myko-blue;
+  font-size: 45px;
+  border: 1px solid $myko-blue;
+  background-color: transparent;
+  width: max-content;
+  min-width: 50vw;
+}

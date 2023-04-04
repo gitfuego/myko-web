@@ -10,12 +10,18 @@
   transform: translate(0px, -300px);
 }
 
-.fade-in-left, .fade-in-right, .fade-in-top {
+.fade-in-down {
+  transform: translate(0px, 150px);
+}
+
+.fade-in-left, .fade-in-right, .fade-in-top , .fade-in-down {
   opacity: 0;
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  pointer-events: none;
   &.fade-in-visible {
     transform: translate(0px, 0px);
     opacity: 1;
+    pointer-events: all;
   }
 }
 
