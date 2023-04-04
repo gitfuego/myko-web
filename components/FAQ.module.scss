@@ -9,9 +9,12 @@
 }
 
 .faqSelect {
+  color: white;
   background-color: transparent;
   border: none;
-  color: $myko-blue;
+  background: linear-gradient(170deg, rgb(250, 159, 173) 0%, rgb(135, 225, 255) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   &:focus {
     outline: none;
   }

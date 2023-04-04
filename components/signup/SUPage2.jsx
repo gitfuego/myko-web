@@ -4,6 +4,7 @@ import { useState } from 'react';
 export default function({ nextPage, backPage }) {
 
   function handleNext() {
+    const code = [digit1, digit2, digit3, digit4].join('');
     nextPage();
   }
 
@@ -11,10 +12,11 @@ export default function({ nextPage, backPage }) {
   const [ digit2, setDigit2 ] = useState(null);
   const [ digit3, setDigit3 ] = useState(null);
   const [ digit4, setDigit4 ] = useState(null);
+
   
   return (
     <div>
-      <button className={styles.back} onClick={backPage}></button>
+      <button className={styles.back} type='button' onClick={backPage}></button>
       <div className={styles.enterCode}>Enter your code</div>
       <div className={styles.container}>
         <div className={styles.digits} >

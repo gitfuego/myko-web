@@ -17,6 +17,7 @@ export default function({toggleSignedUp}) {
   return (
     <form onSubmit={handleSubmit} className={styles.container} style={{height: '55%'}}>
       <button className={styles.back} 
+      type='button'
       style={{alignSelf: 'flex-start'}} 
       onClick={() => window.location.href = '/'}></button>
         <input

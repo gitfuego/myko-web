@@ -29,7 +29,7 @@ function LoginForm() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container} style={{height: '55%'}}>
+    <form onSubmit={handleSubmit} className={styles.container} style={{height: '60%'}}>
       <button className={styles.back} 
       style={{alignSelf: 'flex-start'}} 
       onClick={() => window.location.href = '/'}></button>
@@ -47,9 +47,7 @@ function LoginForm() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       /> <br/>
-      <button className={styles.blackbtn} type="submit">
-        Log In
-      </button>
+      <button className={styles.blackbtn} type="submit">LOG IN</button>
       <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <a href='/signup'>Sign up</a></div>
     </form>
   );
