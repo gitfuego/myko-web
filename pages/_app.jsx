@@ -1,7 +1,6 @@
 import '../styles/globals.scss';
 import { useState } from 'react';
 import Header from '../components/Header';
-import Login from '../components/Login';
 
 export default function({ Component, pageProps }) {
   const [user, setUser] = useState(null);
