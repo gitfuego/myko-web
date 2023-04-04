@@ -59,7 +59,7 @@ body {
 }
 
 #landing-phone {
-  width: 80%;
+  width: 30vw;
   -webkit-filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
   filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
 }
@@ -96,7 +96,7 @@ a {
 
   &:hover {
     transition: box-shadow 300ms;
-    box-shadow: $myko-blue 0px 0px 12px 3px;
+    box-shadow: plum 0px 0px 12px 3px;
   }
 }
 
@@ -104,19 +104,19 @@ a {
   margin: 2%;
   display: flex;
   width: 60%;
-  height: 400px;
+  height: 30vh;
   box-sizing: content-box;
   border: 2px solid white;
   border-radius: 25px;
   overflow: hidden;
-  & * {
+  & img {
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
     opacity: .8;
     transition: .5s ease;
     &:hover {
-      width: 350px;
+      width: 300px;
       opacity: 1;
       filter: contrast(120%);
     }

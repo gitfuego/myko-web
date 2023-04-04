@@ -9,9 +9,12 @@
 }
 
 .faqSelect {
-  background-color: unset;
-  border: unset;
+  background-color: transparent;
+  border: none;
   color: $myko-blue;
+  &:focus {
+    outline: none;
+  }
 }
 
 .faq, .faqSelect {

@@ -1,6 +1,7 @@
 import '../styles/globals.scss';
 import { useState } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function({ Component, pageProps }) {
   const [user, setUser] = useState(null);
@@ -14,8 +15,9 @@ export default function({ Component, pageProps }) {
   }
   return (
     <div id="background">
-      <Header user={user} handleClick={user === null ? clickLogin : signout} setUser={setUser} />
+      <Header key={'header'} user={user} handleClick={ user === null ? clickLogin : signout} setUser={setUser} />
       <Component {...pageProps} user={user} />
+      <Footer key={'footer'}/>
     </div>
   );
 }

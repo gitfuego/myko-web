@@ -10,21 +10,22 @@
 }
 
 .topContainer {
-  width: 90%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3vh 0;
+  padding: 2vh 0;
+  height: 10vh;
+  box-sizing: border-box;
 }
 
 .topSub {
-  min-width: 100px;
+  min-width: 200px;
   width: fit-content;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .button {
@@ -32,7 +33,7 @@
   height: 50px;
   width: 130px;
   color: white;
-  background: linear-gradient(to right, black, black) padding-box,
+  background: linear-gradient(to right, #242424, #242424) padding-box,
   linear-gradient(to top right, $myko-blue, lightyellow, white) border-box;
   border-radius: 23px;
   border: 1px solid transparent;

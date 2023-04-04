@@ -11,7 +11,7 @@ export default function({ user, handleClick }) {
         </a>
       </div>
       <div className={styles.topSub}>
-        <button className={styles.button} onClick={handleClick}>{user === null ? 'LOGIN' : 'SIGN OUT'}</button>
+        <button id='login' className={styles.button} onClick={handleClick}>{user === null ? 'LOGIN' : 'SIGN OUT'}</button>
       </div>
     </header>
   );

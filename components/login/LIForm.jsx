@@ -1,6 +1,5 @@
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import styles from '../form.module.scss'
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,28 +24,33 @@ function LoginForm() {
       });
   };
 
+  useEffect(() => {
+    document.getElementById('login').style.display = 'none';
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Username"
-        variant="outlined"
-        fullWidth
-        margin="normal"
+    <form onSubmit={handleSubmit} className={styles.container} style={{height: '55%'}}>
+      <button className={styles.back} 
+      style={{alignSelf: 'flex-start'}} 
+      onClick={() => window.location.href = '/'}></button>
+      <h2>Welcome back!</h2>
+      <input
+        className={styles.inputField}
+        placeholder="Username"
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
-      <TextField
-        label="Password"
+      <input
+        className={styles.inputField}
+        placeholder="Password"
         type="password"
-        variant="outlined"
-        fullWidth
-        margin="normal"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-      />
-      <Button variant="contained" color="primary" type="submit">
+      /> <br/>
+      <button className={styles.blackbtn} type="submit">
         Log In
-      </Button>
+      </button>
+      <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <a href='/signup'>Sign up</a></div>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import FadeIn from "../components/FadeIn";
 import FAQ from "../components/FAQ";
+import Footer from "../components/Footer";
 
 export default function() {
   const fanQs = [
@@ -16,7 +17,7 @@ export default function() {
     <div className="content">
       <section className="splash">
         <div className="landing-text">
-          <div className="main">Where artists and their top listeners hangout.</div>
+          <div className="main">Where artists and their top listeners hang out.</div>
           <div className="sub">Connect with Spotify and see which communities you qualify for!</div>
         </div>
         <div>
@@ -25,12 +26,12 @@ export default function() {
       </section>
       <section className="entrance-container">
         <FadeIn direction={'left'}>
-          <a href="#">
+          <a href="/signup">
             <div className="rainbow-btn">I'M A FAN</div>
           </a>
         </FadeIn>
         <FadeIn direction={'right'}>
-          <a href="#">
+          <a href="/artist-signup">
           <div className="rainbow-btn">I'M AN ARTIST</div>
           </a>
         </FadeIn>
