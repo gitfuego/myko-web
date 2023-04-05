@@ -10,14 +10,17 @@
 }
 
 .topContainer {
-  width: 95%;
+  width: 100%;
   margin: 0px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2vh 0;
+  padding: 1vh 1vw;
   height: 10vh;
   box-sizing: border-box;
+  z-index: 1000;
+  position: fixed;
+  background: linear-gradient(180deg, rgb(0, 0, 20) 10%, transparent 100%);
 }
 
 .topSub {

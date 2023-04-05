@@ -15,6 +15,7 @@
   background: linear-gradient(170deg, rgb(250, 159, 173) 0%, rgb(135, 225, 255) 90%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  cursor: pointer;
   &:focus {
     outline: none;
   }
@@ -41,9 +42,9 @@
 
 .question {
   color: $myko-blue;
-  font-size: 45px;
+  font-size: 32px;
   border: 1px solid $myko-blue;
-  background-color: transparent;
+  background-color: transparent !important;
   width: max-content;
   min-width: 50vw;
 }

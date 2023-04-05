@@ -1,6 +1,5 @@
 import FadeIn from "../components/FadeIn";
 import FAQ from "../components/FAQ";
-import Footer from "../components/Footer";
 
 export default function() {
   const fanQs = [

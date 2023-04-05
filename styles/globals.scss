@@ -22,11 +22,12 @@ body {
 #background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(170deg, rgb(0, 0, 30) 10%, lightblue 35%, rgba(173, 216, 230, 0.9) 40%, lightblue 45%, rgb(0, 0, 30) 95%);
-  // background-image: url('/landingBackground.svg');
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: center;
+  background: linear-gradient(170deg, rgb(0, 0, 30, 0.8) 10%, rgba(173, 216, 230, 0.8) 35%, rgba(173, 216, 230, 0.7) 40%, rgba(173, 216, 230, 0.9) 45%, rgba(0, 0, 30, 0.8) 95%),
+  url('/noise.svg');
+  // background-image: url('/noise.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .splash {
@@ -46,7 +47,6 @@ body {
   text-align: center;
   width: 50%;
   position: relative;
-  bottom: 10vh;
 
   & .main {
     font-size: 50px;
@@ -59,6 +59,8 @@ body {
 }
 
 #landing-phone {
+  position: relative;
+  top: 5vh;
   width: 30vw;
   -webkit-filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
   filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
@@ -96,7 +98,7 @@ a {
 
   &:hover {
     transition: box-shadow 300ms;
-    box-shadow: plum 0px 0px 12px 3px;
+    box-shadow: rgb(131, 152, 170) 0px 0px 12px 3px;
   }
 }
 

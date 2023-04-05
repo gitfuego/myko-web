@@ -1,8 +1,8 @@
 @import '../styles/variables';
 
 .container {
+  padding-top: 10vh;
   width: 100%;
-  font-family: HalvarBreit, Arial, Helvetica, sans-serif;
   font-size: x-large;
   display: flex;
   justify-content: space-around;
@@ -20,4 +20,5 @@
   width: 375px;
   height: 750px;
   box-shadow: 0px 0px 10px 0px black;
+  overflow: hidden;
 }

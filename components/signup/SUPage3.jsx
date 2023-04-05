@@ -1,6 +1,8 @@
 import styles from '../form.module.scss';
+import { useRouter } from 'next/router';
 
 export default function({ formData, setFormData }) {
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -33,7 +35,7 @@ export default function({ formData, setFormData }) {
       <br/>
       <div className={styles.small}>Password must be at least 8 characters</div><br/><br/>
       <button className={styles.blackbtn} type="submit">SIGN UP</button><br/>
-      <div className={styles.small}>Already have an account? <a href='/login'>Sign in</a></div>
+      <div className={styles.small}>Already have an account? <a href='#' onClick={() => router.push('/login')}>Sign in</a></div>
     </form>
   );
 }

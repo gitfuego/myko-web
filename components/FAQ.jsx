@@ -15,7 +15,7 @@ export default function({ fanArr, artistArr }) {
             <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'lightblue'}} />}>
               {fanArr[i].question}
             </AccordionSummary>
-            <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '30px', borderRadius: '55px', padding: '5%'}}>
+            <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '25px', borderRadius: '55px', padding: '5%'}}>
               {fanArr[i].answer}
             </AccordionDetails>
           </Accordion>
@@ -31,7 +31,7 @@ export default function({ fanArr, artistArr }) {
             <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'lightblue'}} />}>
               {artistArr[i].question}
             </AccordionSummary>
-            <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '30px', borderRadius: '55px', padding: '5%'}}>
+            <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '25px', borderRadius: '55px', padding: '5%'}}>
               {artistArr[i].answer}
             </AccordionDetails>
           </Accordion>

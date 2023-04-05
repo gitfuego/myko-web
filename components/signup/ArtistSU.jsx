@@ -1,11 +1,13 @@
 import styles from '../form.module.scss';
-import { useState } from 'react';
+import { use, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function({toggleSignedUp}) {
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    window.location.href= '/artist-submission';
+    router.push('/artist-submission');
   };
 
   const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ export default function({toggleSignedUp}) {
       <button className={styles.back} 
       type='button'
       style={{alignSelf: 'flex-start'}} 
-      onClick={() => window.location.href = '/'}></button>
+      onClick={() => router.push('/')}></button>
         <input
           className={styles.inputField}
           placeholder="Artist name"
@@ -49,7 +51,7 @@ export default function({toggleSignedUp}) {
           />
       <div className={styles.small}>Password must be at least 8 characters</div>
       <button className={styles.blackbtn} type="submit">JOIN WAITLIST</button>
-      <div className={styles.small}>Already have an account? <a href='/login'>Sign in</a></div>
+      <div className={styles.small}>Already have an account? <a href='#' onClick={() => router.push('/login')}>Sign in</a></div>
     </form>
   );
 }
