@@ -5,10 +5,10 @@ import Home from '../components/main/Home.jsx';
 
 export default function({ user }) {
   const [ tab, changeTab ] = useState('home');
-
+  // tab === 'search' ? tab : tab
   return (
     <Phone>
-      {tab === 'home' ? <Home /> : tab === 'search' ? tab : tab}
+      {tab === 'home' ? <Home /> : <div style={{height: '100%'}} />}
       <Nav tab={tab} changeTab={changeTab} />
     </Phone>
   )

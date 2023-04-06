@@ -10,7 +10,7 @@ export default function({ formData, setFormData, nextPage }) {
 
   return (
     <div>
-      <button className={styles.back} type='button' onClick={() => router.push('/login')}></button><br/>
+      <button className={styles.back} type='button' onClick={() => router.back()}></button><br/>
       <h2 className={styles.heading}>Enter your phone number:</h2>
       <div className={styles.container}>
         <input

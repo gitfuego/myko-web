@@ -1,13 +1,13 @@
 .fade-in-left {
-  transform: translate(-300px, -300px);
+  transform: translate(-150px, -150px);
 }
 
 .fade-in-right {
-  transform: translate(300px, -300px);
+  transform: translate(150px, -150px);
 }
 
 .fade-in-top {
-  transform: translate(0px, -300px);
+  transform: translate(0px, -150px);
 }
 
 .fade-in-down {
@@ -16,7 +16,7 @@
 
 .fade-in-left, .fade-in-right, .fade-in-top , .fade-in-down {
   opacity: 0;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   pointer-events: none;
   &.fade-in-visible {
     transform: translate(0px, 0px);

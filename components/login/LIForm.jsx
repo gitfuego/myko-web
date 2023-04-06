@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../form.module.scss'
+import ActiveLink from '../ActiveLink';
 
 function LoginForm({ user, setUser }) {
   const [username, setUsername] = useState('');
@@ -54,7 +55,7 @@ function LoginForm({ user, setUser }) {
         onChange={(event) => setPassword(event.target.value)}
       /> <br/>
       <button className={styles.blackbtn} type="submit">LOG IN</button>
-      <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <a href='#' onClick={() => router.push('/signup') } >Sign up</a></div>
+      <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <ActiveLink href={'/signup'} >Sign up</ActiveLink></div>
     </form>
   );
 }

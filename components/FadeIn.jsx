@@ -2,13 +2,17 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './FadeIn.module.scss';
 
 function isElementInView(el) {
-  const rect = el.parentElement.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
+  try {
+    const rect = el.parentElement.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  } catch {
+    
+  }
 }
 
 export default function FadeIn({ children, direction }) {
@@ -38,7 +42,7 @@ export default function FadeIn({ children, direction }) {
 
     window.addEventListener('scroll', handleFadeIn);
     window.addEventListener('resize', handleFadeIn);
-    handleFadeIn();
+    // handleFadeIn();
 
     return () => {
       window.removeEventListener('scroll', handleFadeIn);

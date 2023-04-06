@@ -12,9 +12,11 @@ export default function() {
     {question: "WHO CAN JOIN MY COMMUNITY?", answer: 'placeholder'},
     {question: "CAN I MAKE MONEY FROM THIS?", answer: 'placeholder'}
   ];
+
+
   return (
     <div className="content">
-      <section className="splash">
+      <section key="splash" className="splash">
         <div className="landing-text">
           <div className="main">Where artists and their top listeners hang out.</div>
           <div className="sub">Connect with Spotify and see which communities you qualify for!</div>
@@ -23,7 +25,7 @@ export default function() {
           <img id="landing-phone" src='/landingPhone.svg' />
         </div>
       </section>
-      <section className="entrance-container">
+      <section key="join" className="entrance-container">
         <FadeIn direction={'left'}>
           <a href="/signup">
             <div className="rainbow-btn">I'M A FAN</div>
@@ -38,7 +40,7 @@ export default function() {
       <FadeIn>
         <div className="splash" style={{fontSize: '80px', textAlign: 'center'}}>Connect with your favorite artists today!</div>
       </FadeIn>
-      <section id='artist-gallery'>
+      <section key="gallery" id='artist-gallery'>
             <img src='/badbunny.png' />
             <img src='/taylorswift.jpeg' />
             <img src='/sza.jpg' />
@@ -47,7 +49,7 @@ export default function() {
             <img src='/edsheeran.jpeg' />
             <img src='/shakira.jpeg' />
       </section>
-      <section>
+      <section key="faq">
         <FAQ 
         fanArr={fanQs} 
         artistArr={artistQs} />
