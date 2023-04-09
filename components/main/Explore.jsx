@@ -4,7 +4,7 @@ export default function({user}) {
   return (
     <div style={{height: '100%'}}>
       <header className={styles.header}>
-        <h6>YOUR CLUBS</h6>
+        <h6>EXPLORE</h6>
         <label htmlFor='search' className={styles.searchBox}>
           <div>
           <svg width="20" height="20" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,7 +12,7 @@ export default function({user}) {
           <path d="M21.9515 21.9515L17.4043 17.4043" stroke="#CECECE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           </div>
-          <input id='search' type="text" placeholder="Search chats" />
+          <input id='search' type="text" placeholder="Search artists" />
         </label>
       </header>
       <div style={{height: '100%'}}>

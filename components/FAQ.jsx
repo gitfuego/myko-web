@@ -17,7 +17,7 @@ function CustomAccordion({ q, a }) {
         <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'lightblue'}} />}>
           {q}
         </AccordionSummary>
-        <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '25px', borderRadius: '55px', padding: '5%'}}>
+        <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '20px', borderRadius: '55px', padding: '5%'}}>
           {a}
         </AccordionDetails>
       </Accordion>

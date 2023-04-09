@@ -9,7 +9,7 @@ export default function({ tab, changeTab }) {
           <path d="M3.13672 9.40718L12.5447 2.08984L21.9527 9.40718V20.9058C21.9527 21.4603 21.7325 21.9921 21.3404 22.3842C20.9483 22.7762 20.4165 22.9965 19.8621 22.9965H5.22739C4.67291 22.9965 4.14114 22.7762 3.74906 22.3842C3.35698 21.9921 3.13672 21.4603 3.13672 20.9058V9.40718Z" stroke="#CECECE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <button type='button' className={tab === 'search' ? 'active' : ''} onClick={() => changeTab('search')}>
+        <button type='button' className={tab === 'explore' ? 'active' : ''} onClick={() => changeTab('explore')}>
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.4994 19.8621C16.118 19.8621 19.8621 16.118 19.8621 11.4994C19.8621 6.88081 16.118 3.13672 11.4994 3.13672C6.88081 3.13672 3.13672 6.88081 3.13672 11.4994C3.13672 16.118 6.88081 19.8621 11.4994 19.8621Z" stroke="#CECECE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M21.9515 21.9515L17.4043 17.4043" stroke="#CECECE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
