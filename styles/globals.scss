@@ -60,10 +60,13 @@ body {
 
 #landing-phone {
   position: relative;
-  top: 5vh;
-  width: 30vw;
-  -webkit-filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
-  filter: drop-shadow(0px 0px 10px rgb(0, 0, 0));
+  padding: 5%;
+  width: 25vw;
+  -webkit-filter: drop-shadow(0px 0px 5px white);
+  filter: drop-shadow(0px 0px 5px white);
+  & img {
+    width: 75%;
+  }
 }
 
 .entrance-container {
@@ -95,6 +98,7 @@ a {
   background-repeat: no-repeat;
   border-radius: 20px;
   transition: box-shadow 300ms;
+  box-shadow: 0px 0px 10px whitesmoke;
 
   &:hover {
     transition: box-shadow 300ms;

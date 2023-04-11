@@ -45,7 +45,6 @@
 
 .blackbtn {
   all: unset;
-  cursor: pointer;
   color: white;
   font-family: CircularSTD, Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -58,6 +57,10 @@
   height: 51.64px;
   background: #242424;
   border-radius: 29.6142px;
+  &:hover {
+    background-color: rgb(80, 80, 80);
+    cursor: pointer;
+  }
 }
 
 .back {

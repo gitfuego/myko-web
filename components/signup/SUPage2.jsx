@@ -1,9 +1,8 @@
 import styles from '../form.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function({ nextPage, backPage }) {
 
-  
 
   function handleNext() {
     const code = [digit1, digit2, digit3, digit4].join('');

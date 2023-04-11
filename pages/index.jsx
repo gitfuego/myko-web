@@ -21,8 +21,8 @@ export default function() {
           <div className="main">Where artists and their top listeners hang out.</div>
           <div className="sub">Connect with Spotify and see which communities you qualify for!</div>
         </div>
-        <div>
-          <img id="landing-phone" src='/landingPhone.svg' />
+        <div id="landing-phone">
+          <img src='/landingPhone.svg' />
         </div>
       </section>
       <section key="join" className="entrance-container">
