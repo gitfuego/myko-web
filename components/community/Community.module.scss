@@ -1,0 +1,71 @@
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 88%;
+  padding: 5% 0 0;
+}
+
+.back {
+  all: unset;
+  background-image: url('/backArrow2.svg');
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  height: 24px;
+  width: 12px;
+  // margin: 26px 0px 0px 20px;
+  // align-self: flex-start;
+}
+
+.image {
+  box-sizing: border-box;
+  width: 38px;
+  min-height: 38px;
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+.messageContainer {
+  box-sizing: border-box;
+  height: 640px;
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2% 2% 2%;
+  margin-left: 1%;
+  gap: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 1;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 4px;
+    &:hover {
+      background: #555;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+    margin: 5px;
+  }
+}

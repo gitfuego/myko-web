@@ -2,9 +2,17 @@ import ClubCardExplore from './ClubCardExplore';
 import styles from './Main.module.scss';
 
 export default function({user, hidden}) {
+  const scrollToElement = (element) => {
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: elementPosition,
+      behavior: "smooth"
+    });
+  };
+
   const cards = [];
   for (let i = 0; i < 20; i++) {
-    cards.push(<ClubCardExplore artist={{name: 'The Chainsmokers', src: '/drake.jpeg'}} />);
+    cards.push(<ClubCardExplore key={'explorecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
   return (
     <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
@@ -20,7 +28,9 @@ export default function({user, hidden}) {
           <input id='search' type="text" placeholder="Search artists" />
         </label>
       </header>
-      <div className={styles.clubsExplore}>{cards}</div>
+      <div className={styles.clubsExplore}>
+        {cards}
+      </div>
     </div>
   );
 }

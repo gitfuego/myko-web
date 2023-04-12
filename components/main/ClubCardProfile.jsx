@@ -4,8 +4,8 @@ import styles from './ClubCardProfile.module.scss';
 export default function({ artist }) {
   const router = useRouter();
   const handleClick = (e) => {
-    e.preventDefault()
-    router.push(artist.href)
+    e.preventDefault();
+    router.push(artist.href);
   }
 
   return (

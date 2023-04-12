@@ -4,7 +4,7 @@ import styles from './Main.module.scss';
 export default function({user, hidden}) {
   const cards = [];
   for (let i = 0; i < 20; i++) {
-    cards.push(<ClubCardHome artist={{name: 'The Chainsmokers', src: '/drake.jpeg'}} />);
+    cards.push(<ClubCardHome key={'homecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
   return (
     <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
@@ -20,7 +20,10 @@ export default function({user, hidden}) {
           <input id='search' type="text" placeholder="Search chats" />
         </label>
       </header>
-      <div className={styles.clubsExplore}>{cards}</div>
+      <div className={styles.myClubsHome}>
+        <div id='top1'></div>
+        {cards}
+      </div>
     </div>
   );
 }

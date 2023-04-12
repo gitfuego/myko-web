@@ -4,7 +4,7 @@ import styles from './Main.module.scss';
 export default function({user, hidden}) {
   const cards = [];
   for (let i = 0; i < 20; i++) {
-    cards.push(<ClubCardProfile artist={{name: 'Drake', src: '/drake.jpeg'}} />);
+    cards.push(<ClubCardProfile key={'profilecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
   return (
     <div style={{height: '100%', display: hidden ? 'none' : 'block'}} >

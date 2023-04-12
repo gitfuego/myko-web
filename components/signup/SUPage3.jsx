@@ -23,6 +23,7 @@ export default function({ formData, setFormData }) {
             className={styles.input}
             placeholder="Name"
             id='name'
+            minLength={1}
             value={formData.name}
             onChange={(event) =>
               setFormData({ ...formData, name: event.target.value })

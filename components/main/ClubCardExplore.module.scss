@@ -17,8 +17,14 @@
 }
 
 .name {
+  height: 38px;
   text-align: center;
   font-size: 16px;
   color: black;
   width: fit-content;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

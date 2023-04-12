@@ -15,10 +15,10 @@ function isElementInView(el) {
   }
 }
 
-export default function FadeIn({ children, direction }) {
+export default function FadeIn({ children, direction, style }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
-
+  if (style === undefined) style = {};
   useEffect(() => {
     function handleFadeIn() {
       if (isElementInView(ref.current)) {
@@ -51,7 +51,7 @@ export default function FadeIn({ children, direction }) {
   }, []);
 
   return (
-    <div>
+    <div style={style}>
       <div ref={ref} className={`${styles[`fade-in-${direction ? direction : 'top'}`]} ${isVisible ? styles['fade-in-visible'] : ''}`}>
         {children}
       </div>
