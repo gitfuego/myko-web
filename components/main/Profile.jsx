@@ -7,11 +7,13 @@ export default function({user}) {
     cards.push(<ClubCardProfile artist={{name: 'Drake', src: '/drake.jpeg'}} />);
   }
   return (
-    <div style={{height: '100%'}} className={styles.profile}>
-      <div className={styles.profilePicContainer}></div>
-      <div className={styles.username}>{user}</div>
-      <button type='button' className={styles.editButton}>Edit Profile</button>
-      <div style={{alignSelf: 'flex-start', fontSize: '16px', margin: '0px 30px'}}>My Clubs</div>
+    <div style={{height: '100%'}} >
+      <div className={styles.profile}>
+        <div className={styles.profilePicContainer}></div>
+        <div className={styles.username}>{user}</div>
+        <button type='button' className={styles.editButton}>Edit Profile</button>
+        <div style={{alignSelf: 'flex-start', fontSize: '16px', margin: '0px 30px'}}>My Clubs</div>
+      </div>
       <div className={styles.myClubsProfile}>{cards}</div>
     </div>
   );

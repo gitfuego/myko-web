@@ -2,15 +2,15 @@ import FadeIn from "../components/FadeIn";
 import FAQ from "../components/FAQ";
 
 export default function() {
+  const artistQs = [
+    {question: 'WHAT IS MYKO?', answer: 'Myko is an exclusive access community chatroom for music artists and their top fans to more closely connect away from social media'},
+    {question: "WHO CAN JOIN MY COMMUNITY?", answer: 'Anyone. You control how exclusive or inclusive your community is based on your monthly listening requirement and subscription price'},
+    {question: "CAN I MAKE MONEY FROM THIS?", answer: "Absolutely. Just set a monthly subscription price for your community for fans that don't qualify based on their monthly listening history to start earning"}
+  ];
   const fanQs = [
-    {question: 'WHAT IS MYKO?', answer: 'placeholder'},
+    {question: 'WHAT IS MYKO?', answer: 'Myko is an exclusive access community chatroom for music artists and their top fans to more closely connect away from social media'},
     {question: "HOW CAN I JOIN AN ARTIST'S COMMUNITY?", answer: 'placeholder'},
     {question: "WHAT CAN I DO IF I DON'T QUALIFY?", answer: 'placeholder'}
-  ];
-  const artistQs = [
-    {question: 'WHAT IS MYKO?', answer: 'placeholder'},
-    {question: "WHO CAN JOIN MY COMMUNITY?", answer: 'placeholder'},
-    {question: "CAN I MAKE MONEY FROM THIS?", answer: 'placeholder'}
   ];
 
 

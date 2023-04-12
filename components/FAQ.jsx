@@ -13,11 +13,11 @@ function CustomAccordion({ q, a }) {
 
   return (
     <div type='button' onClick={handleClick} className={styles.faqWrapper}>
-      <Accordion className={styles.question} expanded={expanded} style={{borderRadius: '100px', padding: '5%'}}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'lightblue'}} />}>
-          {q}
+      <Accordion className={styles.question} expanded={expanded} style={{borderRadius: '100px', padding: '5%', textAlign: 'center'}}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon style={{color: 'lightblue'}}/>}>
+          <div style={{textAlign: 'center', width: '100%', fontSize: '40px'}}>{q}</div>
         </AccordionSummary>
-        <AccordionDetails className='answer' style={{backgroundColor: 'rgba(0,0,0,0.3)', fontSize: '20px', borderRadius: '55px', padding: '5%'}}>
+        <AccordionDetails style={{ /*backgroundColor: 'rgba(0,0,0,0.3)', */fontSize: '40px', borderRadius: '55px', padding: '2% 0% 0%', fontFamily: 'Helvetica', fontWeight: '400', color: 'white'}}>
           {a}
         </AccordionDetails>
       </Accordion>

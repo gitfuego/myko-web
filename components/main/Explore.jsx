@@ -1,6 +1,11 @@
+import ClubCardExplore from './ClubCardExplore';
 import styles from './Main.module.scss';
 
 export default function({user}) {
+  const cards = [];
+  for (let i = 0; i < 20; i++) {
+    cards.push(<ClubCardExplore artist={{name: 'The Chainsmokers', src: '/drake.jpeg'}} />);
+  }
   return (
     <div style={{height: '100%'}}>
       <header className={styles.header}>
@@ -15,8 +20,7 @@ export default function({user}) {
           <input id='search' type="text" placeholder="Search artists" />
         </label>
       </header>
-      <div style={{height: '100%'}}>
-      </div>
+      <div className={styles.clubsExplore}>{cards}</div>
     </div>
   );
 }
