@@ -82,6 +82,8 @@
   border: none;
   font-size: 16px;
   font-family: CircularSTD, Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
   &:focus {
     outline: none;
   }
@@ -102,6 +104,20 @@
   text-align: center;
 }
 
+.input {
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  border: none;
+  background-color: inherit;
+  &:focus {
+    outline: inherit;
+  }
+  &[type = 'text'] + button {
+    background-image: url('/eye-off.svg');
+  }
+}
+
 .digits {
   margin-top: 30px;
   display: flex;
@@ -117,4 +133,15 @@
   & a {
     color: #2E5CD3;
   }
+}
+
+.toggleShowPassword {
+  all: unset;
+  width: 20px;
+  height: 20px;
+  background-image: url('/eye.svg');
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  align-self: center;
 }

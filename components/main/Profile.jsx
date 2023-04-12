@@ -1,13 +1,13 @@
 import ClubCardProfile from './ClubCardProfile';
 import styles from './Main.module.scss';
 
-export default function({user}) {
+export default function({user, hidden}) {
   const cards = [];
   for (let i = 0; i < 20; i++) {
     cards.push(<ClubCardProfile artist={{name: 'Drake', src: '/drake.jpeg'}} />);
   }
   return (
-    <div style={{height: '100%'}} >
+    <div style={{height: '100%', display: hidden ? 'none' : 'block'}} >
       <div className={styles.profile}>
         <div className={styles.profilePicContainer}></div>
         <div className={styles.username}>{user}</div>

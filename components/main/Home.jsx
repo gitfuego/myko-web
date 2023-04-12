@@ -1,8 +1,13 @@
+import ClubCardHome from './ClubCardHome';
 import styles from './Main.module.scss';
 
-export default function({user}) {
+export default function({user, hidden}) {
+  const cards = [];
+  for (let i = 0; i < 20; i++) {
+    cards.push(<ClubCardHome artist={{name: 'The Chainsmokers', src: '/drake.jpeg'}} />);
+  }
   return (
-    <div style={{height: '100%'}}>
+    <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>
         <h6>YOUR CLUBS</h6>
         <label htmlFor='search' className={styles.searchBox}>
@@ -15,8 +20,7 @@ export default function({user}) {
           <input id='search' type="text" placeholder="Search chats" />
         </label>
       </header>
-      <div style={{height: '100%'}}>
-      </div>
+      <div className={styles.clubsExplore}>{cards}</div>
     </div>
   );
 }

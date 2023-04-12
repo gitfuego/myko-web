@@ -8,11 +8,12 @@ import Profile from '../components/main/Profile.jsx';
 export default function({ user }) {
   // state will be either home, explore, or profile
   const [ tab, changeTab ] = useState('home');
-  // tab === 'search' ? tab : tab
+
   return (
     <Phone>
-      {tab === 'home' ? <Home user={user} /> : 
-      tab === 'explore' ? <Explore user={user} /> : <Profile user={user}/>}
+      <Home user={user} hidden={tab !== 'home'}/>
+      <Explore user={user} hidden={tab !== 'explore'}/>
+      <Profile user={user} hidden={tab !== 'profile'}/>
       <Nav tab={tab} changeTab={changeTab} />
     </Phone>
   )

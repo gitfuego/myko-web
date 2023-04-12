@@ -1,13 +1,13 @@
 import ClubCardExplore from './ClubCardExplore';
 import styles from './Main.module.scss';
 
-export default function({user}) {
+export default function({user, hidden}) {
   const cards = [];
   for (let i = 0; i < 20; i++) {
     cards.push(<ClubCardExplore artist={{name: 'The Chainsmokers', src: '/drake.jpeg'}} />);
   }
   return (
-    <div style={{height: '100%'}}>
+    <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>
         <h6>EXPLORE</h6>
         <label htmlFor='search' className={styles.searchBox}>
