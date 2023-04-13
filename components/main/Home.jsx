@@ -4,13 +4,9 @@ import { useEffect } from 'react';
 
 export default function({user, hidden}) {
   const cards = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     cards.push(<ClubCardHome key={'homecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 1);  
-  }, []);
 
   return (
     <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
@@ -28,6 +24,7 @@ export default function({user, hidden}) {
       </header>
       <div className={styles.myClubsHome}>
         {cards}
+        <div className={styles.bumper}></div>
       </div>
     </div>
   );

@@ -1,23 +1,38 @@
-.main {
+.outer {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 3000;
+  background-color: white;
+  z-index: 100;
   width: 100%;
   height: 100%;
+}
+
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  overflow: hidden;
+  position: relative;
+  height: 100%;
+  justify-content: space-between;
 }
 
-.header {
+.header, .sendContainer {
+  width: 100%;
+  min-height: 10%;
+  box-shadow: 0px 0px 5px lightgray;
+  padding: 5% 0 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.topFlex {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 88%;
-  padding: 5% 0 0;
 }
 
 .back {
@@ -60,7 +75,8 @@
 
 .messageContainer {
   box-sizing: border-box;
-  height: 640px;
+  // border: 1px solid red;
+  height: 100%;
   width: 98%;
   display: flex;
   flex-direction: column;
@@ -86,4 +102,47 @@
     border-radius: 4px;
     margin: 5px;
   }
+}
+
+.sendContainer {
+  background-color: white;
+  position: relative;
+  bottom: 0;
+  z-index: 100;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  padding: 0 0px 8%;
+}
+
+.plus {
+  all: unset;
+  width: 30px;
+  height: 30px;
+  background-image: url('/plus.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.type {
+  all: unset;
+  text-align: left;
+  margin-left: 5%;
+  width: 85%;
+  height: 30px; 
+  font-size: 16px;
+  font-weight: 600;
+  font-family: CircularLight, Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  // resize: vertical;
 }
