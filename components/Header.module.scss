@@ -18,7 +18,7 @@
   padding: 1vh 1vw;
   height: 10vh;
   box-sizing: border-box;
-  z-index: 99999;
+  z-index: 999;
   position: fixed;
   background: linear-gradient(180deg, rgb(0, 0, 20) 10%, transparent 100%);
 }
@@ -50,5 +50,11 @@
     cursor: pointer;
     box-shadow: whitesmoke 0px 0px 12px 3px;
     transition: box-shadow 300ms;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .topContainer {
+    display: none;
   }
 }

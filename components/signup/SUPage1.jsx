@@ -14,6 +14,7 @@ export default function({ formData, setFormData, nextPage }) {
       <h2 className={styles.heading}>Enter your phone number:</h2>
       <div className={styles.container}>
         <input
+        type='tel'
         className={styles.inputField}
         placeholder="Phone number"
         value={formData.number}

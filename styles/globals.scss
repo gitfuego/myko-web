@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+* {
+  margin: 0px;
+}
+
 body {
   height: 100%;
   box-sizing: border-box;

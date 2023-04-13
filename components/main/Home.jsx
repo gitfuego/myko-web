@@ -1,11 +1,17 @@
 import ClubCardHome from './ClubCardHome';
 import styles from './Main.module.scss';
+import { useEffect } from 'react';
 
 export default function({user, hidden}) {
   const cards = [];
   for (let i = 0; i < 20; i++) {
     cards.push(<ClubCardHome key={'homecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 1);  
+  }, []);
+
   return (
     <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>
@@ -21,7 +27,6 @@ export default function({user, hidden}) {
         </label>
       </header>
       <div className={styles.myClubsHome}>
-        <div id='top1'></div>
         {cards}
       </div>
     </div>

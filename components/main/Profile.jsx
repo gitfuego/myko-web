@@ -14,7 +14,9 @@ export default function({user, hidden}) {
         <button type='button' className={styles.editButton}>Edit Profile</button>
         <div style={{alignSelf: 'flex-start', fontSize: '16px', margin: '0px 30px'}}>My Clubs</div>
       </div>
-      <div className={styles.myClubsProfile}>{cards}</div>
+      <div className={styles.myClubsProfile}>
+        {cards}
+      </div>
     </div>
   );
 }

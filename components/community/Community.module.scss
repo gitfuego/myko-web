@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
+  overflow: hidden;
 }
 
 .header {
@@ -25,10 +26,27 @@
   background-size: cover;
   background-position: center;
   cursor: pointer;
-  height: 24px;
-  width: 12px;
-  // margin: 26px 0px 0px 20px;
+  height: 20px;
+  width: 10px;
+  margin: 3%;
   // align-self: flex-start;
+}
+
+.name {
+  width: 260px; /* adjust value as needed */
+  font-size: 40px; /* initial font size */
+  line-height: 1; /* adjust value as needed */
+  max-height: 80px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  & span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .image {

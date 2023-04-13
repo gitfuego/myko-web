@@ -9,7 +9,7 @@ export default function({ user, artist }) {
   <div className={styles.main}>
     <header className={styles.header}>
       <button className={styles.back} type='button' onClick={() => { router.back() }}></button>
-      <div>{artist}</div>
+      <div className={styles.name}><span>{"Drake"}</span></div>
       <a href='#'>
         <div style={{backgroundImage: `url('/drake.jpeg')`}} className={styles.image}></div>
       </a>
