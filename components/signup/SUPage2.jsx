@@ -28,7 +28,7 @@ export default function({ nextPage, backPage }) {
   return (
     <div>
       <button className={styles.back} type='button' onClick={backPage}></button>
-      <div className={styles.enterCode}>Enter your code</div>
+      <h2 className={styles.enterCode}>Enter your code</h2>
       <div className={styles.container}>
         <div className={styles.digits} >
           <input

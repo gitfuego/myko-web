@@ -34,14 +34,14 @@ export default function({ sender, message }) {
           <div className={styles.name}>{sender.name}</div>
           { true ? <div className={styles.verified} ></div> : '' }
         </div>
-        <div className={styles.message}>{"message here"}</div>
+        <div className={styles.message}>{"what up OVO family!!"}</div>
       </div>
       <div className={styles.likeContainer}>
         <button type='button'
          onClick={like} 
          className={styles.like} 
          style={{backgroundImage: `url('/heart.svg')`}}></button>
-        <div className={styles.likeCount}>{aN(113048000)}</div>
+        <div className={styles.likeCount}>{aN(148000)}</div>
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ export default function({user, hidden}) {
     cards.push(<ClubCardExplore key={'explorecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
   return (
-    <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
+    <div style={{height: '90%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>
         <h6>EXPLORE</h6>
         <label htmlFor='search' className={styles.searchBox}>

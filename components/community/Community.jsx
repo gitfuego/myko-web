@@ -5,11 +5,11 @@ import Message from './Message';
 
 export default function({ user, artist }) {
   const router = useRouter();
-  
+
   const [messageText, setMessageText] = useState('');
 
   const messages = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 1; i++) {
     messages.push(<Message sender={{name: 'Drake', src: '/drake.jpeg'}} />);
   }
 

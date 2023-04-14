@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 
 export default function({user, hidden}) {
   const cards = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 1; i++) {
     cards.push(<ClubCardHome key={'homecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
   }
 
   return (
-    <div style={{height: '100%', display: hidden ? 'none' : 'block'}}>
+    <div style={{height: '90%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>
         <h6>YOUR CLUBS</h6>
         <label htmlFor='search' className={styles.searchBox}>
@@ -24,7 +24,6 @@ export default function({user, hidden}) {
       </header>
       <div className={styles.myClubsHome}>
         {cards}
-        <div className={styles.bumper}></div>
       </div>
     </div>
   );
