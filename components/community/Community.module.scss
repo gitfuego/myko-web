@@ -38,13 +38,14 @@
 .back {
   all: unset;
   background-image: url('/backArrow2.svg');
-  background-size: cover;
+  background-size: 50%;
   background-position: center;
+  background-repeat: no-repeat;
   cursor: pointer;
   height: 20px;
   width: 10px;
-  margin: 3%;
-  // align-self: flex-start;
+  padding: 10px;
+  align-self: flex-start;
 }
 
 .name {
