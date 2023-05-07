@@ -27,7 +27,7 @@ export default function LoginForm({ user, setUser }) {
         return response.json();
       })
       .then((newUser) => {
-        if (newUser) {
+        if (newUser.hasOwnProperty('user_id')) {
           console.log(newUser);
           setUser(newUser);
           router.push(`/home`);

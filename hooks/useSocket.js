@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 const serverUrl = process.env.NODE_ENV === 'production'
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3001';
+  : 'http://localhost:3000';
 
 
 const useSocket = () => {

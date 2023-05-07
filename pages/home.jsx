@@ -12,7 +12,7 @@ export default function({ user }) {
   const [ tab, changeTab ] = useState('home');
   const router = useRouter();
   const { artist } = router.query;
-
+  
   useEffect(() => { 
     if (user === null) router.push('/login');
    }, [])

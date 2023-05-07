@@ -1,8 +1,11 @@
 import styles from '../form.module.scss';
 import ActiveLink from '../ActiveLink';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function({ formData, setFormData }) {
+  const router = useRouter();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -16,8 +19,9 @@ export default function({ formData, setFormData }) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      window.alert(data);
+      router.push('/login');
     })
+    .catch(window.alert('error creating user'))
   };
   const [passwordVisible, setPasswordVisible] = useState(false);
 

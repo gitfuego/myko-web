@@ -6,7 +6,7 @@ const sessionController = {};
 sessionController.isLoggedIn = (req, res, next) => {
   const cookieID = req.cookies.ssid;
   const findSessionQuery = `SELECT cookie_id, user_id FROM sessions
-  WHERE cookie_id = $1 RETURNING *`;
+  WHERE cookie_id = $1`;
   const values = [cookieID];
   res.locals.isSSIDValid = false;
   if (!cookieID) return next();
@@ -14,7 +14,7 @@ sessionController.isLoggedIn = (req, res, next) => {
     .then((data) => {
       if (data.rows[0] !== undefined) {
         res.locals.isSSIDValid = true;
-        console.log('row : ', data.rows);
+        console.log('rows : ', data.rows);
         res.locals.userID = data.rows[0]['user_id'];
         console.log('userID: ', res.locals.userID);
         return next();

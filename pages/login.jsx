@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 export default function({ user, setUser }) {
   const checkCookie = () => {
     fetch('/api/login', {
-      method: 'GET',
       credentials: 'include',
     })
     .then( (response) => {
@@ -24,8 +23,7 @@ export default function({ user, setUser }) {
   };
 
   useEffect(() => {
-    if (user !== null && user !== undefined) router.push('/home');
-    else checkCookie();
+    checkCookie();
   }, []);
 
   return (

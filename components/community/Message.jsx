@@ -1,6 +1,6 @@
 import styles from './Message.module.scss';
 
-export default function({ sender, message }) {
+export default function({ data }) {
 
   const SI_SYMBOL = ["", "k", "m", "b", "t", "q"];
   // abbreviates number
@@ -28,13 +28,13 @@ export default function({ sender, message }) {
   }
   return (
     <div className={styles.container}>
-      <div style={{backgroundImage: `url(${sender.src})`}} className={styles.image}></div>
+      <div style={{backgroundImage: `url(${data.profile_pic ?? '/drake.jpeg'})`}} className={styles.image}></div>
       <div className={styles.textContainer}>
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-          <div className={styles.name}>{sender.name}</div>
-          { true ? <div className={styles.verified} ></div> : '' }
+          <div className={styles.name}>{data.username ?? "user"}</div>
+          { data.verified === 1 ? <div className={styles.verified} ></div> : '' }
         </div>
-        <div className={styles.message}>{"what up OVO family!!"}</div>
+        <div className={styles.message}>{data.message ?? "hi"}</div>
       </div>
       <div className={styles.likeContainer}>
         <button type='button'

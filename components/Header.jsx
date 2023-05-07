@@ -8,7 +8,7 @@ export default function({ user, handleClick }) {
       <div className={styles.topSub}></div>
       <div className={styles.topSub}>
         <ActiveLink href={'/'}>
-          <img src={user === null ? "/mykoWhite.svg" : "/mykoGradient.svg"} />
+          <img src={!user ? "/mykoWhite.svg" : "/mykoGradient.svg"} />
         </ActiveLink>
       </div>
       <div className={styles.topSub}>

@@ -1,23 +1,40 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Community.module.scss';
 import Message from './Message';
+import socket from '../../lib/socket';
+
 
 export default function({ user, artist }) {
   const router = useRouter();
+
+  const [ messages, setMessages] = useState([]);
+  const [ socketInstance, setSocketInstance ] = useState(socket);
+
+  useEffect(() => {
+    // Connect to the socket.io server
+    socket.connect();
+
+    socket.emit('join',  {user, room: artist} )
+
+    // Listen for 'message' events
+    socket.on('message', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+
+    return () => {
+      // Disconnect from the socket.io server
+      socket.disconnect();
+    };
+  }, []);
 
   const [messageText, setMessageText] = useState('');
 
   function handleSend(e) {
     if (e.key === 'Enter' && messageText.length > 0) {
-      console.log('sent!');
+      socket.emit('message', {...user, artist, message: messageText});
       setMessageText('');
     }
-  }
-
-  const messages = [];
-  for (let i = 0; i < 1; i++) {
-    messages.push(<Message sender={{name: 'Drake', src: '/drake.jpeg'}} />);
   }
 
   return (
@@ -33,7 +50,7 @@ export default function({ user, artist }) {
         </div>
       </header>
       <div className={styles.messageContainer}>
-        {messages}
+        {messages.map((msgData) => <Message data={msgData} />)}
       </div>
       <div className={styles.sendContainer} >
         <div className={styles.sub}>
