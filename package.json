@@ -4,9 +4,10 @@
   "description": "myko, where artists and fans connect",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon ssr-server.js",
     "build": "next build",
     "start": "next start",
+    "dev:server": "next dev & nodemon server.js",
     "lint": "next lint"
   },
   "repository": {
@@ -24,9 +25,19 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.15",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "next": "^13.2.4",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.60.0"
+    "sass": "^1.60.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "uuid": "^9.0.0"
   }
 }

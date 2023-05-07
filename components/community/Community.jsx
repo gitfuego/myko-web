@@ -8,6 +8,13 @@ export default function({ user, artist }) {
 
   const [messageText, setMessageText] = useState('');
 
+  function handleSend(e) {
+    if (e.key === 'Enter' && messageText.length > 0) {
+      console.log('sent!');
+      setMessageText('');
+    }
+  }
+
   const messages = [];
   for (let i = 0; i < 1; i++) {
     messages.push(<Message sender={{name: 'Drake', src: '/drake.jpeg'}} />);
@@ -34,7 +41,8 @@ export default function({ user, artist }) {
           placeholder='Send Message...' 
           className={styles.type} 
           value={messageText}
-          onChange={(event) => setMessageText(event.target.value)}/>
+          onChange={(event) => setMessageText(event.target.value)}
+          onKeyDown={handleSend}/>
           <button type='button' className={styles.plus}></button>
         </div>
       </div>

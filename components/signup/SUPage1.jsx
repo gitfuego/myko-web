@@ -19,7 +19,7 @@ export default function({ formData, setFormData, nextPage }) {
         placeholder="Phone number"
         value={formData.number}
         onChange={(event) =>
-          setFormData({ ...formData, number: event.target.value })
+          setFormData({ ...formData, phoneNumber: event.target.value.replace(/\D/g,'') })
         }
         />
         <button className={styles.blackbtn} onClick={handleNext}>NEXT</button>

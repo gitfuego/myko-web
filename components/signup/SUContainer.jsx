@@ -15,7 +15,7 @@ export default function() {
   }
 
   const [formData, setFormData] = useState({
-    number: "",
+    phoneNumber: "",
     name: "",
     password: "",
   });

@@ -6,6 +6,18 @@ export default function({ formData, setFormData }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
+    fetch('/api/signup', {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      window.alert(data);
+    })
   };
   const [passwordVisible, setPasswordVisible] = useState(false);
 

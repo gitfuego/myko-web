@@ -19,10 +19,10 @@ export default function({ nextPage, backPage }) {
     }
   }
 
-  const [ digit1, setDigit1 ] = useState(null);
-  const [ digit2, setDigit2 ] = useState(null);
-  const [ digit3, setDigit3 ] = useState(null);
-  const [ digit4, setDigit4 ] = useState(null);
+  const [ digit1, setDigit1 ] = useState('');
+  const [ digit2, setDigit2 ] = useState('');
+  const [ digit3, setDigit3 ] = useState('');
+  const [ digit4, setDigit4 ] = useState('');
 
   
   return (

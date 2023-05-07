@@ -13,8 +13,14 @@ export default function({ Component, pageProps }) {
   }
 
   function signout() {
-    setUser(null);
-    router.push('/login');
+    fetch('/api/signout')
+    .then(() => {
+      setUser(null);
+      router.push('/login');
+    })
+    .catch(() => {
+      window.alert('logout error')
+    });
   }
   return (
     <div id="background">

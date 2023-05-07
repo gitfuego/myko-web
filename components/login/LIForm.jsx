@@ -3,36 +3,44 @@ import { useRouter } from 'next/router';
 import styles from '../form.module.scss'
 import ActiveLink from '../ActiveLink';
 
-function LoginForm({ user, setUser }) {
-  const [username, setUsername] = useState('');
+export default function LoginForm({ user, setUser }) {
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
   const router = useRouter();
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // fetch('INSERT API ENDPOINT HERE*****', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ username, password }),
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       // handle successful login
-    //     } else {
-    //       throw new Error('Login failed.');
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-    setUser(1);
-    router.push('/home');
+    console.log(phoneNumber, password);
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ phoneNumber, password }),
+    })
+      .then((response) => {
+        // if response comes back with verified, save id. else redirect to sign up?
+        // how is id sent back?
+        console.log('login response: ', response);
+        return response.json();
+      })
+      .then((newUser) => {
+        if (newUser) {
+          console.log(newUser);
+          setUser(newUser);
+          router.push(`/home`);
+        } else {
+          router.push(`/login`);
+        }
+      })
+      .catch(() => {
+        window.alert('error on submission')
+        // router.push(`/login`);
+      });
   };
 
-  // useEffect(() => {
-  //   document.getElementById('login').style.display = 'none';
-  // }, []);
 
   return (
     <form onSubmit={handleSubmit} className={styles.container} style={{height: '60%'}}>
@@ -43,9 +51,10 @@ function LoginForm({ user, setUser }) {
       <h2>Welcome back!</h2>
       <input
         className={styles.inputField}
-        placeholder="Username"
-        value={username}
-        onChange={(event) => setUsername(event.target.value)}
+        placeholder="Phone Number"
+        type='tel'
+        value={phoneNumber}
+        onChange={(event) => setPhoneNumber(event.target.value.trim())}
       />
       <input
         className={styles.inputField}
@@ -59,5 +68,3 @@ function LoginForm({ user, setUser }) {
     </form>
   );
 }
-
-export default LoginForm;

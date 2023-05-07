@@ -13,6 +13,10 @@ export default function({ user }) {
   const router = useRouter();
   const { artist } = router.query;
 
+  useEffect(() => { 
+    if (user === null) router.push('/login');
+   }, [])
+
   return (
     <Phone>
       { artist ? <Community artist={artist} user={user} /> : '' }

@@ -31,7 +31,7 @@ export default function({ fanArr, artistArr }) {
   const artistQs = [];
   for (let i = 0; i < fanArr.length; i++) {
     fanQs.push(
-      <div style={{margin: '3% auto'}}>
+      <div key={'f' + i} style={{margin: '3% auto'}}>
         <FadeIn direction={'down'}>
           <CustomAccordion q={fanArr[i].question} a={fanArr[i].answer} />
         </FadeIn>
@@ -40,7 +40,7 @@ export default function({ fanArr, artistArr }) {
   }
   for (let i = 0; i < artistArr.length; i++) {
     artistQs.push(
-      <div style={{margin: '3% auto'}}>
+      <div key={'a' + i} style={{margin: '3% auto'}}>
         <FadeIn direction={'down'}>
           <CustomAccordion q={artistArr[i].question} a={artistArr[i].answer} />
         </FadeIn>
