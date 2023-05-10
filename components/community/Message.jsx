@@ -41,7 +41,7 @@ export default function({ data }) {
          onClick={like} 
          className={styles.like} 
          style={{backgroundImage: `url('/heart.svg')`}}></button>
-        <div className={styles.likeCount}>{aN(148000)}</div>
+        <div className={styles.likeCount}>{aN(0)}</div>
       </div>
     </div>
   )

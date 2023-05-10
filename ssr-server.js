@@ -65,7 +65,7 @@ app.prepare()
     });
   
     socket.on('message', (msgData) => {
-      console.log('message: ' + msgData.message);
+      // console.log('message: ' + msgData.message);
   
       // Broadcast message to users in the room
       io.to(socket.room).emit('message', {

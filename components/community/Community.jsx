@@ -9,7 +9,6 @@ export default function({ user, artist }) {
   const router = useRouter();
 
   const [ messages, setMessages] = useState([]);
-  const [ socketInstance, setSocketInstance ] = useState(socket);
 
   useEffect(() => {
     // Connect to the socket.io server
