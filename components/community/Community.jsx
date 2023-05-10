@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './Community.module.scss';
 import Message from './Message';
 import socket from '../../lib/socket';
@@ -7,7 +7,7 @@ import socket from '../../lib/socket';
 
 export default function({ user, artist }) {
   const router = useRouter();
-
+  const messagesEndRef = useRef(null);
   const [ messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,11 @@ export default function({ user, artist }) {
       // Disconnect from the socket.io server
       socket.disconnect();
     };
-  }, []);
+  }, [artist]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView();
+  }, [messages]);
 
   const [messageText, setMessageText] = useState('');
 
@@ -50,6 +54,7 @@ export default function({ user, artist }) {
       </header>
       <div className={styles.messageContainer}>
         {messages.map((msgData) => <Message data={msgData} />)}
+        <div ref={messagesEndRef} />
       </div>
       <div className={styles.sendContainer} >
         <div className={styles.sub}>

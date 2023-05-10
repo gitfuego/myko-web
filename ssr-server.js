@@ -43,7 +43,7 @@ app.prepare()
       users[socket.id] = user.username;
       rooms[socket.id] = room;
 
-      console.log('a user joined room: ' + room)
+      console.log(`a user (${users[socket.id]}) joined room: ` + room)
   
       // Broadcast to other users in the room
       // socket.to(room).emit('user joined', `${user.username} has joined the room`);

@@ -3,10 +3,10 @@ const messageController = {};
 
 messageController.getMessages = async (req, res, next) => {
   const artistID = req.query.artist;
-  const getMessages = `SELECT message_text, sender_id, artist_id, sent_at 
+  const getMessages = `SELECT message_text, user_id, artist_id, message_media, created_at 
     FROM messages 
     WHERE artist_id = $1
-    ORDER BY sent_at ASC`;
+    ORDER BY created_at ASC`;
   const values = [artistID];
 
   try {
@@ -21,13 +21,13 @@ messageController.getMessages = async (req, res, next) => {
   }
 };
 
-messageController.sendMessage = (req, res, next) => {
+messageController.addMessage = (req, res, next) => {
   const {
     message_text,
     sender_id,
     artist_id,
   } = req.body;
-  const newMessage = `INSERT INTO messages (message_text, sender_id, artist_id)
+  const newMessage = `INSERT INTO messages (message_text, user_id, artist_id)
   VALUES ($1, $2, $3) RETURNING *`;
   const values = [
     message_text,
@@ -54,71 +54,5 @@ messageController.sendMessage = (req, res, next) => {
     });
 };
 
-// jobController.deleteJob = async (req, res, next) => {
-//   const { id } = req.params;
-//   const deleteJob = `DELETE FROM jobs WHERE job_id = $1 RETURNING *`;
-//   const values = [id];
-
-//   try {
-//     const deleted = await db.query(deleteJob, values);
-//     res.locals.deletedJob = deleted.rows[0];
-//     return next();
-//   } catch {
-//     return next({
-//       log: 'jobTrackerController.deleteJob error',
-//       message: { err: 'ERROR in jobTrackerController.deleteJob controller' },
-//     });
-//   }
-// };
-
-// jobController.updateJobApp = async (req, res, next) => {
-//   console.log('WE ARE HERE');
-//   const { id } = req.params;
-//   console.log('request body', req.body);
-//   const {
-//     job_role,
-//     company_name,
-//     email,
-//     phone,
-//     contact_name,
-//     job_link,
-//     status,
-//   } = req.body;
-//   console.log(
-//     'updates inputs are: ',
-//     job_role,
-//     company_name,
-//     email,
-//     phone,
-//     contact_name,
-//     job_link,
-//     status
-//   );
-//   const updateJobApp = `UPDATE jobs SET job_role = $2, company_name = $3, email = $4, phone = $5, contact_name = $6, job_link = $7, status = $8 WHERE job_id = $1 RETURNING *;`;
-//   const values = [
-//     id,
-//     job_role,
-//     company_name,
-//     email,
-//     phone,
-//     contact_name,
-//     job_link,
-//     status,
-//   ];
-
-//   try {
-//     const updatedJobApp = await db.query(updateJobApp, values);
-//     // console.log('updateJobApp: ', updatedJobApp);
-//     console.log('updated App: ', updatedJobApp.rows[0]);
-//     res.locals.updatedJobApp = updatedJobApp.rows[0];
-//     console.log('response body: ', res.locals.updatedJobApp);
-//     return next();
-//   } catch {
-//     return next({
-//       log: 'jobTrackerController.updateJob error',
-//       message: { err: 'ERROR in jobTrackerController.updateJob controller' },
-//     });
-//   }
-// };
 
 module.exports = messageController;
