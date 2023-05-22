@@ -9,6 +9,10 @@ export default function LoginForm({ user, setUser }) {
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (user !== null) router.push('/home');
+  })
+
 
   const handleSubmit = (event) => {
     event.preventDefault();

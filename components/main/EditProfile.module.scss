@@ -1,0 +1,96 @@
+.outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.header {
+  width: 100%;
+  min-height: 10%;
+  box-shadow: 0px 0px 5px lightgray;
+  padding: 5% 0 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.topFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 88%;
+}
+
+.back {
+  all: unset;
+  background-image: url('/backArrow2.svg');
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 20px;
+  width: 10px;
+  padding: 10px;
+  align-self: flex-start;
+}
+
+.name {
+  width: 260px; /* adjust value as needed */
+  font-size: 40px; /* initial font size */
+  line-height: 1; /* adjust value as needed */
+  max-height: 80px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  & span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.image {
+  box-sizing: border-box;
+  width: 38px;
+  min-height: 38px;
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+.spotify {
+  border: 2px solid #191414;
+  width: fit-content;
+  border-radius: 100px;
+  padding: 10px 40px;
+  background-color: #1DB954;
+  color: #191414;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+}
+
+.logo {
+  background-image: url('/spotifyLogo.png');
+  background-position: center;
+  background-size: cover;
+  width: 18px;
+  height: 18px;
+}

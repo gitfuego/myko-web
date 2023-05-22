@@ -1,7 +1,10 @@
 const express = require('express')
 const next = require('next')
 const cookieParser = require('cookie-parser');
+const SpotifyWebApi = require('spotify-web-api-node');
+require('dotenv').config();
 const PORT = 3000;
+
 
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
@@ -73,6 +76,51 @@ app.prepare()
       });
     });
   });
+
+  server.post('/api/spotifyLogin', (req, res) => {
+    const code = req.body.code;
+    const spotifyApi = new SpotifyWebApi({
+      redirectUri: 'http://localhost:3000/home',
+      clientId: "9ed4ae02c05d4296857b53d2397fee6a",
+      clientSecret: process.env.CLIENT_SECRET,
+    })
+
+    spotifyApi.authorizationCodeGrant(code)
+    .then(data => {
+      res.json({
+        accessToken: data.body.access_token,
+        refreshToken: data.body.refresh_token,
+        expiresIn: data.body.expires_in,
+      })
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    })
+  })
+
+  server.post('/api/spotifyRefresh', (req, res) => {
+    const refreshToken = req.body.refreshToken;
+    const spotifyApi = new SpotifyWebApi({
+      redirectUri: 'http://localhost:3000/home',
+      clientId: "9ed4ae02c05d4296857b53d2397fee6a",
+      clientSecret: process.env.CLIENT_SECRET,
+      refreshToken,
+    })
+
+    spotifyApi.refreshAccessToken()
+    .then(data => {
+      console.log(data);
+
+      // spotifyApi.setAccessToken(data.body['access_token']);
+      res.json({
+        accessToken: data.body.access_token,
+        expiresIn: data.body.expires_in,
+      })
+    })
+    .catch(() => {
+      res.sendStatus(400);
+    })
+  })
 
   server.post('/api/signup', userController.createUser, (req, res) => {
     res.json({ message: 'Signup successful', user: res.locals.createdUser });
