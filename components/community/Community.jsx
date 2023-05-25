@@ -3,12 +3,36 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './Community.module.scss';
 import Message from './Message';
 import socket from '../../lib/socket';
+import SpotifyWebApi from 'spotify-web-api-node';
+import { getAccordionSummaryUtilityClass } from '@mui/material';
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: "9ed4ae02c05d4296857b53d2397fee6a",
+})
 
 
-export default function({ user, artist }) {
+export default function({ user, artist, accessToken }) {
   const router = useRouter();
   const messagesEndRef = useRef(null);
   const [ messages, setMessages] = useState([]);
+  const [ artistData, setArtistData ] = useState(null);
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken)
+  }, [accessToken])
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.getArtist(artist)
+      .then(data => {
+        console.log(data.body);
+        setArtistData({
+          src: data.body.images[0]?.url,
+          name: data.body.name,
+        })
+      })
+  }, [accessToken])
 
   useEffect(() => {
     // Connect to the socket.io server
@@ -46,9 +70,9 @@ export default function({ user, artist }) {
       <header className={styles.header}>
         <div className={styles.topFlex}>
           <button className={styles.back} type='button' onClick={() => { router.back() }}></button>
-          <div className={styles.name}><span>{"Drake"}</span></div>
+          <div className={styles.name}><span>{artistData ? artistData.name : 'loading...'}</span></div>
           <a href='#'>
-            <div style={{backgroundImage: `url('/drake.jpeg')`}} className={styles.image}></div>
+            <div style={{backgroundImage: `url(${artistData?.src})`}} className={styles.image}></div>
           </a>
         </div>
       </header>

@@ -1,14 +1,43 @@
+import { useEffect, useState } from 'react';
 import ClubCardExplore from './ClubCardExplore';
 import styles from './Main.module.scss';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-export default function({user, hidden}) {
-  const scrollToElement = (element) => {
-    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: elementPosition,
-      behavior: "smooth"
-    });
-  };
+const spotifyApi = new SpotifyWebApi({
+  clientId: "9ed4ae02c05d4296857b53d2397fee6a",
+})
+
+export default function({user, hidden, accessToken }) {
+
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchresults] = useState([]);
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken)
+  }, [accessToken])
+
+  useEffect(() => {
+    if (!search) return setSearchresults([]);
+    if(!accessToken) return;
+
+    spotifyApi.searchArtists(search)
+    .then(res => {
+      setSearchresults(
+        res.body.artists.items.map(artist => {
+          return { 
+            id: artist.id,
+            src: artist.images[0]?.url,
+            name: artist.name,
+          };
+        })
+      )
+    })
+  }, [search, accessToken])
+
+  useEffect(() => {
+    console.log(searchResults);
+  }, [searchResults])
 
   const cards = [];
   for (let i = 0; i < 20; i++) {
@@ -25,11 +54,15 @@ export default function({user, hidden}) {
           <path d="M21.9515 21.9515L17.4043 17.4043" stroke="#CECECE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           </div>
-          <input id='search' type="text" placeholder="Search artists" />
+          <input id='search' 
+          type="text" 
+          placeholder="Search artists" 
+          value={search}
+          onChange={e => setSearch(e.target.value)}/>
         </label>
       </header>
       <div className={styles.clubsExplore}>
-        {cards}
+        {searchResults.map(artist => <ClubCardExplore key={'explorecard' + artist.id} artist={artist} />)}
       </div>
     </div>
   );

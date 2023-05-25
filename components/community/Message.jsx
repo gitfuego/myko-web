@@ -28,7 +28,7 @@ export default function({ data }) {
   }
   return (
     <div className={styles.container}>
-      <div style={{backgroundImage: `url(${data.profile_pic ?? '/drake.jpeg'})`}} className={styles.image}></div>
+      <div style={{backgroundImage: `url(${data.profile_pic ?? '/profileicon.svg'})`}} className={styles.image}></div>
       <div className={styles.textContainer}>
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
           <div className={styles.name}>{data.username ?? "user"}</div>
