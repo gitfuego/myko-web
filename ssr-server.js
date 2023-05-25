@@ -69,7 +69,7 @@ app.prepare()
   
     socket.on('message', (msgData) => {
       // console.log('message: ' + msgData.message);
-  
+      // TODO: save msgs to database
       // Broadcast message to users in the room
       io.to(socket.room).emit('message', {
         ...msgData
@@ -143,7 +143,7 @@ app.prepare()
     sessionController.startSession,
     (req, res) => {
       console.log(
-        'i am inside login server and res...userId is',
+        'userId is',
         res.locals.user.user_id
       );
       res.status(201).json({ ...res.locals.user });

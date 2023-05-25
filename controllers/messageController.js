@@ -39,8 +39,8 @@ messageController.addMessage = (req, res, next) => {
     .then((data) => {
       if (data.rows[0] === undefined) {
         return next({
-          log: 'createJob',
-          message: { err: 'ERROR: Enter job application' },
+          log: 'createMessage',
+          message: { err: 'ERROR: Enter message' },
         });
       }
       res.locals.createdJob = data.rows[0];
@@ -48,8 +48,8 @@ messageController.addMessage = (req, res, next) => {
     })
     .catch(() => {
       next({
-        log: 'userController.createJob',
-        message: { err: 'error inside create job controller' },
+        log: 'userController.createMessage',
+        message: { err: 'error inside create message controller' },
       });
     });
 };
