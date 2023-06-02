@@ -7,8 +7,8 @@ export default function() {
   return (
     <div className={styles.popUpContainer}>
       <div className={styles.popUp}>
-        <button className={styles.x} onClick={() => router.push('/login')}></button>
-        <div className={styles.msg}>Invalid login attempt. Please double check your credentials.</div>
+        <div className={styles.msg}>Account created, log in to start chatting!</div>
+        <button className={styles.blackbtn} type='button' onClick={() => router.push('/login')}>LOG IN</button>
       </div>
     </div>
   )

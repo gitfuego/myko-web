@@ -8,9 +8,11 @@ export default function({ formData, setFormData }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
+    if (formData.password.length < 8 || formData.name.length < 1) {
+      return router.push('/signup?failed=true');
+    }
     fetch('/api/signup', {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -19,9 +21,11 @@ export default function({ formData, setFormData }) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      router.push('/login');
+      router.push('/signup?success=true');
     })
-    .catch(window.alert('error creating user'))
+    .catch(() => {
+      router.push('/signup?failed=true');
+    })
   };
   const [passwordVisible, setPasswordVisible] = useState(false);
 

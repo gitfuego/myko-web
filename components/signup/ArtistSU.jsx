@@ -12,8 +12,7 @@ export default function({toggleSignedUp}) {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    password: "",
+    email: ""
   });
   
   return (
@@ -38,18 +37,6 @@ export default function({toggleSignedUp}) {
             setFormData({ ...formData, name: event.target.value })
           }
           />
-        <input
-          className={styles.inputField}
-          id='password'
-          placeholder="Password"
-          type="password"
-          minLength={3}
-          value={formData.password}
-          onChange={(event) =>
-            setFormData({ ...formData, password: event.target.value })
-          }
-          />
-      <div className={styles.small}>Password must be at least 8 characters</div>
       <button className={styles.blackbtn} type="submit">JOIN WAITLIST</button>
       <div className={styles.small}>Already have an account? <a href='#' onClick={() => router.push('/login')}>Sign in</a></div>
     </form>

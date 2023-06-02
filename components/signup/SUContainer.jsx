@@ -7,7 +7,7 @@ export default function() {
   const [ pageNumber, setPageNumber ] = useState(1);
 
   function nextPage() {
-    setPageNumber(pageNumber + 1);
+    setPageNumber(pageNumber + 2);
   }
 
   function backPage() {
@@ -24,7 +24,7 @@ export default function() {
     <div style={{height: '100%', width: '100%'}}>
       {pageNumber === 1 ? <SUPage1 formData={formData} setFormData={setFormData} nextPage={nextPage} /> : 
       pageNumber === 2 ? <SUPage2 nextPage={nextPage} backPage={backPage} /> : 
-      <SUPage3 formData={formData} setFormData={setFormData} nextPage={nextPage} />}
+      <SUPage3 formData={formData} setFormData={setFormData} />}
     </div>
   );
 }

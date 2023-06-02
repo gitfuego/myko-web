@@ -7,8 +7,8 @@ export default function() {
   return (
     <div className={styles.popUpContainer}>
       <div className={styles.popUp}>
-        <button className={styles.x} onClick={() => router.push('/login')}></button>
-        <div className={styles.msg}>Invalid login attempt. Please double check your credentials.</div>
+        <button type='button' className={styles.x} onClick={() => router.back()}></button>
+        <div className={styles.msg}>Invalid signup attempt. Please make sure all fields are filled.</div>
       </div>
     </div>
   )
