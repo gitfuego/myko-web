@@ -1,44 +1,60 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import styles from './EditProfile.module.scss';
+import { useState } from 'react';
 
-export default function({ user, token, setToken, code }) {
+export default function({ user, setUser }) {
   const router = useRouter();
 
-  const CLIENT_ID = "9ed4ae02c05d4296857b53d2397fee6a";
-  const REDIRECT_URI = "http://localhost:3000/home";
-  const AUTH_URL =
-  `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
+  const [newPic, setNewPic] = useState(null);
   
-  function handleSubmit(e) {
-    e.preventDefault();
+  function changeImage(e) {
+    const input = e.target;
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const dataURL = reader.result;
+      setNewPic(dataURL);
+    }
+
+    reader.readAsDataURL(input.files[0]);
   }
 
-  // function getAuthToken() {
-  //   const authParameters = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + process.env.CLIENT_SECRET
-  //   }
-  //   fetch('https://accounts.spotify.com/api/token', authParameters)
-  //   .then(result => result.json())
-  //   .then(data => console.log(data))
-  // }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    
+    const file = document.getElementById('profile-pic-upload').files[0];
+    if (!file) return;
 
-  // useEffect(() => {
-  //   const hash = window.location.hash;
-  //   let token = window.localStorage.getItem("token");
+    // get url in s3 bucket from server endpoint
+    const { url } = await fetch('/api/s3Url').then(res => res.json())
+    
+    // post image to the s3 bucket
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: file
+    })
 
-  //   if (!token && hash) {
-  //     token = hash.substring(1).split('&').find(e => e.startsWith("access_token")).split("=")[1];
+    const imageUrl = url.split('?')[0];
 
-  //     window.location.hash = "";
-  //     window.localStorage.setItem("token", token);
-  //     setToken(token);
-  //   }
-  // }, []);
+    // update path in db
+    fetch(`/api/updateProfilePic/${user.user_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ imageUrl }),
+    })
+      .then((data) => {
+        setUser({...user, profile_pic: imageUrl})
+      })
+      .catch((err) => {
+        window.alert('error updating profile');
+      })
+
+  }
 
   return (
   <div className={styles.outer}>
@@ -47,24 +63,19 @@ export default function({ user, token, setToken, code }) {
         <div className={styles.topFlex}>
           <button className={styles.back} type='button' onClick={() => { router.back() }}></button>
           <div className={styles.name}><span>Edit Profile</span></div>
-          <a href=''>
-            <div className={styles.image}></div>
-          </a>
+          <div></div>
         </div>
       </header>
-      { !code ? 
-      <a href={AUTH_URL} >
-        <div className={styles.spotify}>
-          <div>Connect to Spotify</div>
-          <div className={styles.logo}></div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor='profile-pic-upload' className={styles.piclabel}>
+        <input id='profile-pic-upload' type='file' accept='image/*' onChange={(e) => changeImage(e)}/>
+        <div className={styles.image} style={{backgroundImage: `url(${newPic ?? user?.profile_pic ?? '/profileicon.svg'})`}}></div>
+        <h5>Edit Profile Picture</h5>
+        </label>
+        <div className={styles.buttonContainer}>
+          <button className={styles.submit} type='submit'>Save Changes</button>
+          <button className={styles.cancel} type='button' onClick={() => { router.back() }}>Cancel</button>
         </div>
-      </a>
-      : 
-      <div className={styles.spotify}>Spotify Connected</div>
-      }
-      
-      
-      <form onSubmit={handleSubmit}>
       </form>
     </div>
   </div>

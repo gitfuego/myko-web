@@ -16,7 +16,6 @@ export default function LoginForm({ user, setUser }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(phoneNumber, password);
     fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -25,18 +24,14 @@ export default function LoginForm({ user, setUser }) {
       body: JSON.stringify({ phoneNumber, password }),
     })
       .then((response) => {
-        // if response comes back with verified, save id. else redirect to sign up?
-        // how is id sent back?
-        console.log('login response: ', response);
         return response.json();
       })
       .then((newUser) => {
         if (newUser.hasOwnProperty('user_id')) {
-          console.log(newUser);
           setUser(newUser);
           router.push(`/home`);
         } else {
-          router.push(`/login`);
+          router.push(`/login?loginFailed=true`);
         }
       })
       .catch(() => {

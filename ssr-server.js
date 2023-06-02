@@ -2,18 +2,18 @@ const express = require('express')
 const next = require('next')
 const cookieParser = require('cookie-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
-require('dotenv').config();
 const PORT = 3000;
-
+const db = require('./models.js');
+const { generateUploadURL } = require('./s3.js');
 
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 const sessionController = require('./controllers/sessionController.js');
+const messageController = require('./controllers/messageController.js');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
 app.prepare()
 .then(() => {
   const server = express();
@@ -43,7 +43,7 @@ app.prepare()
       socket.join(room);
   
       // Store user and room data
-      users[socket.id] = user.username;
+      users[socket.id] = user.user_id;
       rooms[socket.id] = room;
 
       console.log(`a user (${users[socket.id]}) joined room: ` + room)
@@ -68,13 +68,34 @@ app.prepare()
     });
   
     socket.on('message', (msgData) => {
-      // console.log('message: ' + msgData.message);
-      // TODO: save msgs to database
+      const {
+        message_text,
+        userID,
+        artistID,
+      } = msgData;
+
+      const newMessage = `INSERT INTO messages (message_text, user_id, artist_id)
+      VALUES ($1, $2, $3) RETURNING *`;
+      const values = [
+        message_text,
+        userID,
+        artistID,
+      ];
+    
+      db.query(newMessage, values)
+        .then((data) => {
+          if (data.rows[0] !== undefined) {
+            console.log(data.rows[0]);
+          }
+        })
+        .catch((err) => {
+        console.log('error posting msg to db: ', err);
+        });
       // Broadcast message to users in the room
       io.to(socket.room).emit('message', {
         ...msgData
       });
-    });
+    }); 
   });
 
   server.post('/api/spotifyLogin', (req, res) => {
@@ -149,6 +170,19 @@ app.prepare()
       res.status(201).json({ ...res.locals.user });
     }
   );
+
+  server.get('/api/messages/:artistID', messageController.getMessages, (req, res) => {
+    res.json([...res.locals.messages]);
+  })
+
+  server.get('/api/s3Url', async (req, res) => {
+    const url = generateUploadURL()
+    res.json({url})
+  });
+
+  server.patch('/api/updateProfilePic/:userID', userController.updateProfilePic, (req, res) => {
+    res.status(200).json('profile picture updated!');
+  })
 
   server.get('*', (req, res) => {
     return handle(req, res);

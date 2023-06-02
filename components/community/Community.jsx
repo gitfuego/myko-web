@@ -18,6 +18,15 @@ export default function({ user, artist, accessToken }) {
   const [ artistData, setArtistData ] = useState(null);
 
   useEffect(() => {
+    if (!artist) return;
+    fetch(`/api/messages/${artist}`)
+    .then(response => response.json())
+    .then(newMessages => {
+      setMessages([...newMessages])
+    });
+  }, [artist])
+
+  useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken)
   }, [accessToken])
@@ -26,7 +35,6 @@ export default function({ user, artist, accessToken }) {
     if (!accessToken) return;
     spotifyApi.getArtist(artist)
       .then(data => {
-        console.log(data.body);
         setArtistData({
           src: data.body.images[0]?.url,
           name: data.body.name,
@@ -59,7 +67,13 @@ export default function({ user, artist, accessToken }) {
 
   function handleSend(e) {
     if (e.key === 'Enter' && messageText.length > 0) {
-      socket.emit('message', {...user, artist, message: messageText});
+      socket.emit('message', {
+        userID: user.user_id,
+        username: user.username,
+        profile_pic: user.profile_pic,
+        artistID: artist,
+        message_text: messageText
+      });
       setMessageText('');
     }
   }

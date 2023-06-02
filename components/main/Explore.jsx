@@ -7,10 +7,10 @@ const spotifyApi = new SpotifyWebApi({
   clientId: "9ed4ae02c05d4296857b53d2397fee6a",
 })
 
-export default function({user, hidden, accessToken }) {
+export default function({user, hidden, accessToken, initArtists }) {
 
   const [search, setSearch] = useState('');
-  const [searchResults, setSearchresults] = useState([]);
+  const [searchResults, setSearchResults] = useState(initArtists);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -18,12 +18,13 @@ export default function({user, hidden, accessToken }) {
   }, [accessToken])
 
   useEffect(() => {
-    if (!search) return setSearchresults([]);
-    if(!accessToken) return;
-
+    if (!search) return setSearchResults(initArtists);
+    if (!accessToken) return;
+    let cancel = false;
     spotifyApi.searchArtists(search)
     .then(res => {
-      setSearchresults(
+      if (cancel) return;
+      setSearchResults(
         res.body.artists.items.map(artist => {
           return { 
             id: artist.id,
@@ -33,11 +34,8 @@ export default function({user, hidden, accessToken }) {
         })
       )
     })
-  }, [search, accessToken])
-
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults])
+    return () => cancel = true;
+  }, [search, accessToken, initArtists])
 
   const cards = [];
   for (let i = 0; i < 20; i++) {
