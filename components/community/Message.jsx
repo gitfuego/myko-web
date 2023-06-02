@@ -31,10 +31,10 @@ export default function({ data }) {
       <div style={{backgroundImage: `url(${data.profile_pic ?? '/profileicon.svg'})`}} className={styles.image}></div>
       <div className={styles.textContainer}>
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-          <div className={styles.name}>{data.username ?? "user"}</div>
+          <div className={styles.name}>{data.username ?? "error: unknown username"}</div>
           { data.verified === 1 ? <div className={styles.verified} ></div> : '' }
         </div>
-        <div className={styles.message}>{data.message ?? "hi"}</div>
+        <div className={styles.message}>{data.message_text ?? "error: message not found"}</div>
       </div>
       <div className={styles.likeContainer}>
         <button type='button'

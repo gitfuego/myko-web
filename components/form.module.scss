@@ -152,3 +152,51 @@
   cursor: pointer;
   align-self: center;
 }
+
+.loginFailContainer {
+  backdrop-filter: saturate(100%) blur(2px);
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.subContainer {
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 50%;
+  height: 15%;
+  padding: 2%;
+  border: 2px solid #242424;
+  background-color: white;
+}
+
+.x {
+  all: unset;
+  cursor: pointer;
+  background-color: #242424;
+  color: white;
+  align-self: flex-start;
+  height: 28px;
+  width: 28px;
+  border-radius: 15px;
+  text-align: center;
+  background-image: url('/close-button.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.loginFailMsg {
+  font-size: large;
+}

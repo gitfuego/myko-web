@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router.js';
 import LIForm from '../components/login/LIForm.jsx';
+import LoginFailed from '../components/login/LoginFailed.jsx';
 import Phone from '../components/Phone.jsx';
 import { useEffect } from 'react';
 
 export default function({ user, setUser }) {
+  const router = useRouter();
+  const { loginFailed } = router.query;
+
   const checkCookie = () => {
     fetch('/api/login', {
       credentials: 'include',
@@ -28,6 +33,7 @@ export default function({ user, setUser }) {
 
   return (
     <Phone>
+      { loginFailed ? <LoginFailed /> : ''}
       <LIForm user={user} setUser={setUser} />
     </Phone>
   )

@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: max-content;
   width: 88%;
 }
 
@@ -50,8 +51,8 @@
 
 .name {
   width: 260px; /* adjust value as needed */
-  font-size: 40px; /* initial font size */
-  line-height: 1; /* adjust value as needed */
+  font-size: 30px; /* initial font size */
+  line-height: 1.1; /* adjust value as needed */
   max-height: 80px;
   overflow: hidden;
   display: flex;
