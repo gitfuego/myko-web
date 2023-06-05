@@ -180,7 +180,7 @@ app.prepare()
     res.json({url})
   });
 
-  server.patch('/api/updateProfilePic/:userID', userController.updateProfilePic, (req, res) => {
+  server.patch('/api/updateProfilePic/:userID', userController.updateProfile, (req, res) => {
     res.status(200).json('profile picture updated!');
   })
 

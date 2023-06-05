@@ -10,7 +10,7 @@ import { useRouter } from 'next/router.js';
 import ConnectToSpotify from '../components/main/ConnectToSpotify.jsx';
 import SpotifyWebApi from 'spotify-web-api-node';
 
-export default function({ user, setUser, accessToken, setCode }) {
+export default function({ user, setUser, accessToken, setCode, signout }) {
   // state will be either home, explore, or profile
   const [ tab, changeTab ] = useState('explore');
   const router = useRouter();
@@ -72,7 +72,7 @@ export default function({ user, setUser, accessToken, setCode }) {
       { editProfile ? <EditProfile user={user} setUser={setUser} /> : '' }
       <Home key='home' user={user} hidden={tab !== 'home'} accessToken={accessToken}/>
       <Explore key='explore' user={user} hidden={tab !== 'explore'} accessToken={accessToken} initArtists={initArtists}/>
-      <Profile key='profile' user={user} hidden={tab !== 'profile'} accessToken={accessToken}/>
+      <Profile key='profile' user={user} hidden={tab !== 'profile'} accessToken={accessToken} signout={signout}/>
       <Nav key='nav' tab={tab} changeTab={changeTab} />
     </Phone>
   )

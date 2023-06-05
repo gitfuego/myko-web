@@ -26,12 +26,14 @@ body {
 #background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(170deg, rgb(0, 0, 30, 0.8) 10%, rgba(173, 216, 230, 0.8) 35%, rgba(173, 216, 230, 0.7) 40%, rgba(173, 216, 230, 0.9) 45%, rgba(0, 0, 30, 0.8) 95%),
-  url('/landingBackground.svg');
+  // background: linear-gradient(170deg, rgb(0, 0, 30, 0.8) 10%, rgba(173, 216, 230, 0.8) 35%, rgba(173, 216, 230, 0.7) 40%, rgba(173, 216, 230, 0.9) 45%, rgba(0, 0, 30, 0.8) 95%),
+  background: url('/landingBackground.svg');
   // background-image: url('/noise.svg');
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  // backdrop-filter: blur(50px);
 }
 
 .splash {

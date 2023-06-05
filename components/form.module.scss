@@ -192,8 +192,10 @@
   background-color: #242424;
   color: white;
   align-self: flex-start;
-  min-height: 28px;
-  min-width: 28px;
+  height: 28px;
+  width: 28px;
+  max-height: 28px;
+  max-width: 28px;
   border-radius: 15px;
   text-align: center;
   background-image: url('/close-button.svg');

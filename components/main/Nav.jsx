@@ -12,7 +12,7 @@ export default function({ tab, changeTab }) {
         <button type='button' className={tab === 'explore' ? 'active' : ''} onClick={() => changeTab('explore')}>
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.4994 19.8621C16.118 19.8621 19.8621 16.118 19.8621 11.4994C19.8621 6.88081 16.118 3.13672 11.4994 3.13672C6.88081 3.13672 3.13672 6.88081 3.13672 11.4994C3.13672 16.118 6.88081 19.8621 11.4994 19.8621Z" stroke="#CECECE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M21.9515 21.9515L17.4043 17.4043" stroke="#CECECE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21.9515 21.9515L17.4043 17.4043" stroke="#CECECE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <button type='button' className={tab === 'profile' ? 'active' : ''} onClick={() => changeTab('profile')}>
@@ -23,11 +23,19 @@ export default function({ tab, changeTab }) {
         </button>
       </div>
       <style jsx>{`
-        nav div button.active {
-          background-color: black;
+        nav div button.active:hover {
+          background: unset;
         }
         nav div button.active svg path {
-          stroke: white;
+          stroke: black;
+          fill: black;
+        }
+        nav div button:nth-child(2) svg path {
+          fill: none;
+        }
+        nav div button:nth-child(2).active svg path {
+          fill: none;
+          stroke-width: 3.5;
         }
       `}</style>
     </nav>

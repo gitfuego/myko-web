@@ -22,7 +22,7 @@ export default function({ user, artist, accessToken }) {
     fetch(`/api/messages/${artist}`)
     .then(response => response.json())
     .then(newMessages => {
-      setMessages([...newMessages])
+      if (newMessages?.length) setMessages([...newMessages]);
     });
   }, [artist])
 

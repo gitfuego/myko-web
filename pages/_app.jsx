@@ -66,7 +66,7 @@ export default function({ Component, pageProps }) {
   return (
     <div id="background">
       <Header key={'header'} user={user} handleClick={ user === null ? clickLogin : signout} setUser={setUser} />
-      <Component {...pageProps} user={user} setUser={setUser} accessToken={accessToken} setCode={setCode}/>
+      <Component {...pageProps} user={user} setUser={setUser} accessToken={accessToken} setCode={setCode} signout={signout}/>
       <Footer key={'footer'}/>
     </div>
   );

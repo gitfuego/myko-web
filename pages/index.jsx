@@ -40,7 +40,7 @@ export default function() {
       <FadeIn>
         <div className="splash" style={{fontSize: '80px', textAlign: 'center'}}>Connect with your favorite artists today!</div>
       </FadeIn>
-      <section key="gallery" id='artist-gallery'>
+      {/* <section key="gallery" id='artist-gallery'>
             <img src='/badbunny.png' />
             <img src='/taylorswift.jpeg' />
             <img src='/sza.jpg' />
@@ -48,7 +48,7 @@ export default function() {
             <img src='/drake.jpeg' />
             <img src='/edsheeran.jpeg' />
             <img src='/shakira.jpeg' />
-      </section>
+      </section> */}
       <section key="faq">
         <FAQ 
         fanArr={fanQs} 

@@ -5,7 +5,8 @@ import { useState } from 'react';
 export default function({ user, setUser }) {
   const router = useRouter();
 
-  const [newPic, setNewPic] = useState(null);
+  const [newPic, setNewPic] = useState(user?.profile_pic);
+  const [newUsername, setNewUsername] = useState(user.username);
   
   function changeImage(e) {
     const input = e.target;
@@ -23,21 +24,24 @@ export default function({ user, setUser }) {
     e.preventDefault();
     
     const file = document.getElementById('profile-pic-upload').files[0];
-    if (!file) return;
+    let imageUrl = user.profile_pic;
+    if (file) {
+      // get url in s3 bucket from server endpoint
+      const { url } = await fetch('/api/s3Url').then(res => res.json())
+      
+      // post image to the s3 bucket
+      await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: file
+      })
+  
+      imageUrl = url.split('?')[0];
+    }
 
-    // get url in s3 bucket from server endpoint
-    const { url } = await fetch('/api/s3Url').then(res => res.json())
-    
-    // post image to the s3 bucket
-    await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: file
-    })
 
-    const imageUrl = url.split('?')[0];
 
     // update path in db
     fetch(`/api/updateProfilePic/${user.user_id}`, {
@@ -45,10 +49,11 @@ export default function({ user, setUser }) {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify({ imageUrl }),
+      body: JSON.stringify({ imageUrl, username: newUsername }),
     })
       .then((data) => {
-        setUser({...user, profile_pic: imageUrl})
+        setUser({...user, profile_pic: imageUrl, username: newUsername})
+        router.push('/home');
       })
       .catch((err) => {
         window.alert('error updating profile');
@@ -69,8 +74,12 @@ export default function({ user, setUser }) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor='profile-pic-upload' className={styles.piclabel}>
         <input id='profile-pic-upload' type='file' accept='image/*' onChange={(e) => changeImage(e)}/>
-        <div className={styles.image} style={{backgroundImage: `url(${newPic ?? user?.profile_pic ?? '/profileicon.svg'})`}}></div>
+        <div className={styles.image} style={{backgroundImage: `url(${newPic ?? '/profileicon.svg'})`}}></div>
         <h5>Edit Profile Picture</h5>
+        </label>
+        <label htmlFor='edit-username' className={styles.editUsername}>
+          <input id='edit-username' type='text' value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
+          <h6>Edit Display Name</h6>
         </label>
         <div className={styles.buttonContainer}>
           <button className={styles.submit} type='submit'>Save Changes</button>

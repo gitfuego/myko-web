@@ -27,6 +27,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    &:hover {
+      background: radial-gradient(#dddddd9e 30%, #00000000 75%);
+    }
     & img {
       height: 28px;
       width: 28px;

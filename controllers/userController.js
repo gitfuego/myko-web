@@ -84,12 +84,11 @@ userController.verifyUser = (req, res, next) => {
   });
 }
 
-userController.updateProfilePic = (req, res, next) => {
+userController.updateProfile = (req, res, next) => {
   const { userID } = req.params;
-  const { imageUrl } = req.body;
-  console.log(imageUrl)
-  const updatePicQuery = `UPDATE users SET profile_pic = $1 WHERE user_id = $2;`
-  const values = [imageUrl, userID];
+  const { imageUrl, username } = req.body;
+  const updatePicQuery = `UPDATE users SET profile_pic = $1, username = $2 WHERE user_id = $3;`
+  const values = [imageUrl, username, userID];
 
   db.query(updatePicQuery, values)
     .then((data) => {
@@ -97,8 +96,8 @@ userController.updateProfilePic = (req, res, next) => {
     })
     .catch(() => {
       return next({
-        log: 'userController.updateProfilePic',
-        message: { err: 'error inside profile pic controller' }
+        log: 'userController.updateProfile',
+        message: { err: 'error inside update profile controller' }
       });
     })
 }
