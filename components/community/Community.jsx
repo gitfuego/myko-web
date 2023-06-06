@@ -65,17 +65,19 @@ export default function({ user, artist, accessToken }) {
 
   const [messageText, setMessageText] = useState('');
 
-  function handleSend(e) {
-    if (e.key === 'Enter' && messageText.length > 0) {
-      socket.emit('message', {
-        userID: user.user_id,
-        username: user.username,
-        profile_pic: user.profile_pic,
-        artistID: artist,
-        message_text: messageText
-      });
-      setMessageText('');
+  function handleSend(e, isBtn = false) {
+    if (!isBtn) {
+      if (e.key !== 'Enter' || messageText.length === 0) return;
     }
+
+    socket.emit('message', {
+      userID: user.user_id,
+      username: user.username,
+      profile_pic: user.profile_pic,
+      artistID: artist,
+      message_text: messageText
+    });
+    setMessageText('');
   }
 
   return (
@@ -102,7 +104,9 @@ export default function({ user, artist, accessToken }) {
           value={messageText}
           onChange={(event) => setMessageText(event.target.value)}
           onKeyDown={handleSend}/>
-          <button type='button' className={styles.plus}></button>
+          {messageText.length > 0 ?
+          <button type='button' className={styles.sendButton} onClick={(e) => handleSend(e, true)}>Send</button> : 
+          <button type='button' className={styles.plus} /> }
         </div>
       </div>
     </div>

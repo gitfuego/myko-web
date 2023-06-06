@@ -1,4 +1,5 @@
 import styles from './Message.module.scss';
+import Linkify from 'linkify-react';
 
 export default function({ data }) {
 
@@ -34,7 +35,11 @@ export default function({ data }) {
           <div className={styles.name}>{data.username ?? "error: unknown username"}</div>
           { data.verified === 1 ? <div className={styles.verified} ></div> : '' }
         </div>
-        <div className={styles.message}>{data.message_text ?? "error: message not found"}</div>
+        <div className={styles.message}>
+          <Linkify as="div" options={{target: "_blank", className: styles.link}}>
+            {data.message_text ?? "error: message not found"}
+          </Linkify>
+        </div>
       </div>
       <div className={styles.likeContainer}>
         <button type='button'

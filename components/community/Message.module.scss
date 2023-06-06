@@ -85,3 +85,9 @@
   align-self: flex-end;
   font-size: 10px;
 }
+
+.link {
+  background: linear-gradient(130deg, rgb(255, 128, 147) 20%, rgb(81, 156, 255) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

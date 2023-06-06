@@ -61,7 +61,9 @@ export default function LoginForm({ user, setUser }) {
         type="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-      /> <br/>
+      />
+      <div className={styles.small}><ActiveLink href={'/forgotPassword'} >Forgot my password</ActiveLink></div>
+      <br/>
       <button className={styles.blackbtn} type="submit">LOG IN</button>
       <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <ActiveLink href={'/signup'} >Sign up</ActiveLink></div>
     </form>

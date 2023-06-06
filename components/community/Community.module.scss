@@ -123,7 +123,8 @@
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 92%;
+  gap: 2%;
   padding: 0 0px 8%;
 }
 
@@ -134,6 +135,25 @@
   background-image: url('/plus.svg');
   background-position: center;
   background-size: cover;
+  cursor: pointer;
+}
+
+.sendButton {
+  all: unset;
+  color: white;
+  font-size: 16px;
+  font-family: CircularLight, Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 3px gray;
+  height: 30px;
+  width: 50px;
+  border-radius: 8px;
+  background-color: rgb(0, 98, 255);
+  cursor: pointer;
+  transition: box-shadow 300ms;
+  &:hover, &:focus {
+    box-shadow: 0px 0px 5px 1px black;
+    transition: box-shadow 300ms;
+  }
 }
 
 .type {
