@@ -1,21 +1,16 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
-import styles from './Community.module.scss';
+import styles from './Artist.module.scss';
 import Message from './Message';
 import socket from '../../lib/socket';
-import SpotifyWebApi from 'spotify-web-api-node';
-import { getAccordionSummaryUtilityClass } from '@mui/material';
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: "9ed4ae02c05d4296857b53d2397fee6a",
-})
 
 
-export default function({ user, artist, accessToken }) {
+
+
+export default function({ user, artist, artistData}) {
   const router = useRouter();
   const messagesEndRef = useRef(null);
   const [ messages, setMessages] = useState([]);
-  const [ artistData, setArtistData ] = useState(null);
 
   useEffect(() => {
     if (!artist) return;
@@ -26,21 +21,7 @@ export default function({ user, artist, accessToken }) {
     });
   }, [artist])
 
-  useEffect(() => {
-    if (!accessToken) return;
-    spotifyApi.setAccessToken(accessToken)
-  }, [accessToken])
-
-  useEffect(() => {
-    if (!accessToken) return;
-    spotifyApi.getArtist(artist)
-      .then(data => {
-        setArtistData({
-          src: data.body.images[0]?.url,
-          name: data.body.name,
-        })
-      })
-  }, [accessToken])
+  
 
   useEffect(() => {
     // Connect to the socket.io server

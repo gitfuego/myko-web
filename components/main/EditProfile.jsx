@@ -78,7 +78,11 @@ export default function({ user, setUser }) {
         <h5>Edit Profile Picture</h5>
         </label>
         <label htmlFor='edit-username' className={styles.editUsername}>
-          <input id='edit-username' type='text' value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
+          <input id='edit-username' 
+          type='text' 
+          placeholder='Name'
+          value={newUsername} 
+          onChange={(e) => setNewUsername(e.target.value)} />
           <h6>Edit Display Name</h6>
         </label>
         <div className={styles.buttonContainer}>

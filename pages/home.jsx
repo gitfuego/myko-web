@@ -4,11 +4,12 @@ import Nav from '../components/main/Nav.jsx';
 import Home from '../components/main/Home.jsx';
 import Explore from '../components/main/Explore.jsx';
 import Profile from '../components/main/Profile.jsx';
-import Community from '../components/community/Community.jsx';
+import Artist from '../components/community/Artist.jsx';
 import EditProfile from '../components/main/EditProfile.jsx';
 import { useRouter } from 'next/router.js';
 import ConnectToSpotify from '../components/main/ConnectToSpotify.jsx';
 import SpotifyWebApi from 'spotify-web-api-node';
+
 
 export default function({ user, setUser, accessToken, setCode, signout }) {
   // state will be either home, explore, or profile
@@ -68,7 +69,7 @@ export default function({ user, setUser, accessToken, setCode, signout }) {
   return (
     <Phone>
       { !accessToken ? <ConnectToSpotify/> : ''}
-      { artist ? <Community artist={artist} user={user} accessToken={accessToken}/> : '' }
+      { artist ? <Artist artist={artist} user={user} accessToken={accessToken}/> : '' }
       { editProfile ? <EditProfile user={user} setUser={setUser} /> : '' }
       <Home key='home' user={user} hidden={tab !== 'home'} accessToken={accessToken}/>
       <Explore key='explore' user={user} hidden={tab !== 'explore'} accessToken={accessToken} initArtists={initArtists}/>
