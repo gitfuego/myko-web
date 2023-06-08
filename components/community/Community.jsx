@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
 import styles from './Artist.module.scss';
 import Message from './Message';
+import Loading from '../Loading';
 import socket from '../../lib/socket';
 
 
@@ -67,7 +68,7 @@ export default function({ user, artist, artistData}) {
       <header className={styles.header}>
         <div className={styles.topFlex}>
           <button className={styles.back} type='button' onClick={() => { router.back() }}></button>
-          <div className={styles.name}><span>{artistData ? artistData.name : 'loading...'}</span></div>
+          <div className={styles.name}><span>{artistData ? artistData.name : <Loading/>}</span></div>
           <a href='#'>
             <div style={{backgroundImage: `url(${artistData?.src})`}} className={styles.image}></div>
           </a>

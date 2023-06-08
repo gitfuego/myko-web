@@ -35,7 +35,7 @@ export default function({ tab, changeTab }) {
         }
         nav div button:nth-child(2).active svg path {
           fill: none;
-          stroke-width: 3.5;
+          stroke-width: 3.2;
         }
       `}</style>
     </nav>

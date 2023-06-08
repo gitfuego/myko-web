@@ -10,6 +10,7 @@ const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 const sessionController = require('./controllers/sessionController.js');
 const messageController = require('./controllers/messageController.js');
+const artistController = require('./controllers/artistController.js')
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -173,6 +174,18 @@ app.prepare()
 
   server.get('/api/messages/:artistID', messageController.getMessages, (req, res) => {
     res.json([...res.locals.messages]);
+  })
+
+  server.post('/api/artistRequest', artistController.addRequest, (req, res) => {
+    res.status(200).json('Request added successfully');
+  })
+
+  server.get('/api/getRequests/:artistID', artistController.getRequests, (req, res) => {
+    return;
+  })
+
+  server.get('/api/checkIfRegistered/:artistID', artistController.checkIfRegistered, (req, res) => {
+    return;
   })
 
   server.get('/api/s3Url', async (req, res) => {
