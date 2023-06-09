@@ -1,12 +1,27 @@
+import { useRouter } from 'next/router';
 import styles from '../form.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function({ nextPage, backPage }) {
-
+export default function({ formData, nextPage, backPage }) {
+  const router = useRouter();
 
   function handleNext() {
     const code = [digit1, digit2, digit3, digit4].join('');
-    nextPage();
+    fetch('/api/verifyPhone', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({phoneNumber: formData.phoneNumber, code}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 'approved') nextPage();
+        else {
+          // display phone verify failed
+          backPage();
+        }
+      })
   }
 
   function handleInput(event) {
@@ -24,9 +39,23 @@ export default function({ nextPage, backPage }) {
   const [ digit3, setDigit3 ] = useState('');
   const [ digit4, setDigit4 ] = useState('');
 
+  useEffect(() => {
+    const digit1 = document.getElementById('digit1');
+    digit1.focus();
+  }, [])
+
+  function handlePaste(e) {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text');
+    const inputs = document.querySelectorAll('input[type="tel"]');
+    inputs.forEach((input, index) => {
+      input.value = pastedText[index];
+    })
+    inputs[3].focus();
+  }
   
   return (
-    <div>
+    <div className={styles.outer}>
       <button className={styles.back} type='button' onClick={backPage}></button>
       <h2 className={styles.enterCode}>Enter your code</h2>
       <div className={styles.container}>
@@ -39,6 +68,7 @@ export default function({ nextPage, backPage }) {
             value={digit1}
             onChange={(event) => setDigit1(event.target.value)}
             onInput={handleInput}
+            onPaste={handlePaste}
           />
           
           <input

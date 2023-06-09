@@ -9,15 +9,15 @@ export default function({ formData, setFormData, nextPage }) {
   }
 
   return (
-    <div>
-      <button className={styles.back} type='button' onClick={() => router.back()}></button><br/>
+    <div className={styles.outer}>
+      <button className={styles.back} type='button' onClick={() => router.back()}></button>
       <h2 className={styles.heading}>Enter your phone number:</h2>
       <div className={styles.container}>
         <input
         type='tel'
         className={styles.inputField}
         placeholder="Phone number"
-        value={formData.number}
+        value={formData.phoneNumber}
         onChange={(event) =>
           setFormData({ ...formData, phoneNumber: event.target.value.replace(/\D/g,'') })
         }

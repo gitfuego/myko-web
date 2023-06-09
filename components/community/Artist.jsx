@@ -18,10 +18,15 @@ export default function({ user, artist, accessToken }) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('/api/checkIfRegistered')
-    .then(()=> {
-      return //do something here (setIsRegistered then setLoading)
-    })
+    fetch(`/api/checkIfRegistered/${artist}`)
+      .then((response) => response.json() )
+      .then((data)=> {
+        if (data.isRegistered) setIsRegistered(true);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        console.log('could not check if artist was registered')
+      })
   }, [artist]);
 
   useEffect(() => {

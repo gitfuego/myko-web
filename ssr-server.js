@@ -10,7 +10,8 @@ const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 const sessionController = require('./controllers/sessionController.js');
 const messageController = require('./controllers/messageController.js');
-const artistController = require('./controllers/artistController.js')
+const artistController = require('./controllers/artistController.js');
+const twilioController = require('./controllers/twilioController.js');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -148,6 +149,10 @@ app.prepare()
     res.json({ message: 'Signup successful', user: res.locals.createdUser });
   });
 
+  server.post('/api/verifyPhone', twilioController.verifyPhone, (req, res) => {
+    res.json({didVerify: res.locals.didVerify});
+  })
+
   server.get('/api/login', sessionController.isLoggedIn, userController.getUserInfo, (req, res) => {
     if (res.locals.isSSIDValid) res.status(200).json({...res.locals.user});
     else res.status(501).send('Invalid SSID');
@@ -158,16 +163,11 @@ app.prepare()
     res.sendStatus(204);
   })
   
-  server.post(
-    '/api/login',
+  server.post('/api/login',
     userController.verifyUser,
     cookieController.setSSIDCookie,
     sessionController.startSession,
     (req, res) => {
-      console.log(
-        'userId is',
-        res.locals.user.user_id
-      );
       res.status(201).json({ ...res.locals.user });
     }
   );
@@ -180,12 +180,14 @@ app.prepare()
     res.status(200).json('Request added successfully');
   })
 
-  server.get('/api/getRequests/:artistID', artistController.getRequests, (req, res) => {
-    return;
+  server.post('/api/getRequests/', 
+    artistController.getRequestCount,
+    artistController.checkRequest, (req, res) => {
+    res.status(200).json({numRequests: res.locals.numRequests, didRequest: res.locals.didRequest});
   })
 
   server.get('/api/checkIfRegistered/:artistID', artistController.checkIfRegistered, (req, res) => {
-    return;
+    res.status(200).json({isRegistered: res.locals.isRegistered});
   })
 
   server.get('/api/s3Url', async (req, res) => {

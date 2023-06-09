@@ -13,6 +13,12 @@
   gap: 15px;
 }
 
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .heading {
   margin-top: 10%;
 }
@@ -76,7 +82,7 @@
   height: 32px;
   width: 32px;
   margin: 26px 0px 0px 16px;
-  float: left;
+  align-self: flex-start;
 }
 
 .inputField, .inputCode {

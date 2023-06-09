@@ -195,12 +195,45 @@
   }
 }
 
-.reqButton {
+.reqButton, .requested {
+  text-align: center;
+  height: 30px;
   width: 90px;
   background: linear-gradient(130deg, rgb(255, 128, 147) 20%, rgb(81, 156, 255) 80%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  &:active {
+  -webkit-box-shadow: inset 0px 0px 5px gray;
+  -moz-box-shadow: inset 0px 0px 5px gray;
+  box-shadow: inset 0px 0px 5px gray;
+  }
+}
+
+.requested {
+  box-sizing: border-box;
+  all: unset;
+  font-family: CircularLight, Arial, Helvetica, sans-serif;
+  background-color: lightgray;
+  height: 30px;
+  width: 90px;
+  border-radius: 8px;
+  cursor: not-allowed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: inset 0px 0px 5px gray;
+  -moz-box-shadow: inset 0px 0px 5px gray;
+  box-shadow: inset 0px 0px 5px gray;
+}
+
+.reqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  align-items: center;
+  height: 100%;
 }
 
 .type {

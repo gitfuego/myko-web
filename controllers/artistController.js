@@ -3,18 +3,13 @@ const artistController = {};
 
 artistController.addRequest = async (req, res, next) => {
   const { artistID, userID } = req.body;
-  console.log(artistID)
-  const getMessages = `SELECT m.user_id AS userID, m.artist_id AS artistID, m.message_text AS message_text, m.message_media AS message_media, u.username AS username, u.profile_pic AS profile_pic
-    FROM messages AS m
-    RIGHT JOIN users AS u
-    ON m.user_id = u.user_id
-    WHERE m.artist_id = $1
-    ORDER BY created_at ASC
-    LIMIT 10`;
-  const values = [artistID];
+  console.log(artistID, userID)
+  const newRequest = `INSERT INTO Requests (artist_id, user_id)
+  VALUES ($1, $2) RETURNING *`
+  const values = [artistID, userID];
 
   try {
-    const data = await db.query(getMessages, values);
+    const data = await db.query(newRequest, values);
     res.locals.messages = data.rows;
     return next();
   } catch (error) {
@@ -25,26 +20,41 @@ artistController.addRequest = async (req, res, next) => {
   }
 };
 
-artistController.getRequests = async (req, res, next) => {
-  const { artistID } = req.params;
+artistController.getRequestCount = async (req, res, next) => {
+  const { artistID } = req.body;
   console.log(artistID)
-  const getMessages = `SELECT m.user_id AS userID, m.artist_id AS artistID, m.message_text AS message_text, m.message_media AS message_media, u.username AS username, u.profile_pic AS profile_pic
-    FROM messages AS m
-    RIGHT JOIN users AS u
-    ON m.user_id = u.user_id
-    WHERE m.artist_id = $1
-    ORDER BY created_at ASC
-    LIMIT 10`;
+  const getRequestCount = `SELECT COUNT(*) AS numrequests
+    FROM requests
+    WHERE artist_id = $1`;
   const values = [artistID];
-
   try {
-    const data = await db.query(getMessages, values);
-    res.locals.messages = data.rows;
+    const data = await db.query(getRequestCount, values);
+    res.locals.numRequests = Number(data.rows[0].numrequests);
     return next();
   } catch (error) {
     return next({
-      log: 'artistController.getRequests error',
-      message: { err: 'ERROR in artistController.getRequests' },
+      log: 'artistController.getRequestCount error',
+      message: { err: 'ERROR in artistController.getRequestCount' },
+    });
+  }
+};
+
+artistController.checkRequest = async (req, res, next) => {
+  const { artistID, userID } = req.body;
+  console.log(artistID)
+  const checkRequest = `SELECT *
+    FROM requests
+    WHERE artist_id = $1 AND user_id = $2`;
+  const values = [artistID, userID];
+
+  try {
+    const data = await db.query(checkRequest, values);
+    res.locals.didRequest = data.rows.length > 0;
+    return next();
+  } catch (error) {
+    return next({
+      log: 'artistController.checkRequest error',
+      message: { err: 'ERROR in artistController.checkRequest' },
     });
   }
 };
@@ -52,27 +62,21 @@ artistController.getRequests = async (req, res, next) => {
 artistController.checkIfRegistered = async (req, res, next) => {
   const { artistID } = req.params;
   console.log(artistID)
-  const getMessages = `SELECT m.user_id AS userID, m.artist_id AS artistID, m.message_text AS message_text, m.message_media AS message_media, u.username AS username, u.profile_pic AS profile_pic
-    FROM messages AS m
-    RIGHT JOIN users AS u
-    ON m.user_id = u.user_id
-    WHERE m.artist_id = $1
-    ORDER BY created_at ASC
-    LIMIT 10`;
+  const getMessages = `SELECT *
+    FROM artists
+    WHERE spotify_id = $1`;
   const values = [artistID];
 
   try {
     const data = await db.query(getMessages, values);
-    res.locals.messages = data.rows;
+    res.locals.isRegistered = data.rows.length > 0;
     return next();
   } catch (error) {
     return next({
-      log: 'artistController.getRequests error',
-      message: { err: 'ERROR in artistController.getRequests' },
+      log: 'artistController.checkIfRegistered error',
+      message: { err: 'ERROR in artistController.checkIfRegistered' },
     });
   }
 };
-
-
 
 module.exports = artistController;

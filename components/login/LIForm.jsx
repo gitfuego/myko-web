@@ -53,7 +53,7 @@ export default function LoginForm({ user, setUser }) {
         placeholder="Phone Number"
         type='tel'
         value={phoneNumber}
-        onChange={(event) => setPhoneNumber(event.target.value.trim())}
+        onChange={(event) => setPhoneNumber(event.target.value.replace(/\D/g,'') )}
       />
       <input
         className={styles.inputField}

@@ -11,7 +11,7 @@ import socket from '../../lib/socket';
 export default function({ user, artist, artistData}) {
   const router = useRouter();
   const messagesEndRef = useRef(null);
-  const [ messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if (!artist) return;
@@ -21,8 +21,6 @@ export default function({ user, artist, artistData}) {
       if (newMessages?.length) setMessages([...newMessages]);
     });
   }, [artist])
-
-  
 
   useEffect(() => {
     // Connect to the socket.io server
