@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styles from '../form.module.scss'
 import ActiveLink from '../ActiveLink';
 
-export default function LoginForm({ user, setUser }) {
+export default function LoginForm({ user, setUser, setLoginFailed }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -31,12 +31,11 @@ export default function LoginForm({ user, setUser }) {
           setUser(newUser);
           router.push(`/home`);
         } else {
-          router.push(`/login?loginFailed=true`);
+          setLoginFailed(true);
         }
       })
       .catch(() => {
         window.alert('error on submission')
-        // router.push(`/login`);
       });
   };
 
@@ -62,7 +61,7 @@ export default function LoginForm({ user, setUser }) {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <div className={styles.small}><ActiveLink href={'/forgotPassword'} >Forgot my password</ActiveLink></div>
+      <div className={styles.small}><ActiveLink href={'/forgot-password'} >Forgot my password</ActiveLink></div>
       <br/>
       <button className={styles.blackbtn} type="submit">LOG IN</button>
       <div className={styles.small}>New to <span className={styles.brand}>MYKO</span>? <ActiveLink href={'/signup'} >Sign up</ActiveLink></div>

@@ -3,13 +3,13 @@ import ActiveLink from '../ActiveLink';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function({ formData, setFormData }) {
+export default function({ formData, setFormData, setFailed, setSuccess }) {
   const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (formData.password.length < 8 || formData.name.length < 1) {
-      return router.push('/signup?failed=true');
+      return setFailed(true);
     }
     fetch('/api/signup', {
       method: "POST",
@@ -18,13 +18,11 @@ export default function({ formData, setFormData }) {
       },
       body: JSON.stringify(formData),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      router.push('/signup?success=true');
+    .then((response) => {
+      setSuccess(true);
     })
     .catch(() => {
-      router.push('/signup?failed=true');
+      setFailed(true);
     })
   };
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -69,7 +67,6 @@ export default function({ formData, setFormData }) {
             </button>
         </label>
       </div>
-      <br/>
       <div className={styles.small}>Password must be at least 8 characters</div><br/><br/>
       <button className={styles.blackbtn} type="submit">SIGN UP</button><br/>
       <div className={styles.small}>Already have an account? <ActiveLink href={'/login'}>Sign in</ActiveLink></div>

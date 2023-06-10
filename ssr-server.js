@@ -149,6 +149,14 @@ app.prepare()
     res.json({ message: 'Signup successful', user: res.locals.createdUser });
   });
 
+  server.post('/api/sendCodeSU', userController.checkIfRegistered, twilioController.sendCode, (req, res) => {
+    res.status(200).json({isRegistered: res.locals.isRegistered});
+  })
+
+  server.post('/api/sendCodeFP', twilioController.sendCode, (req, res) => {
+    res.status(200).json({isRegistered: res.locals.isRegistered});
+  })
+
   server.post('/api/verifyPhone', twilioController.verifyPhone, (req, res) => {
     res.json({didVerify: res.locals.didVerify});
   })
@@ -197,6 +205,10 @@ app.prepare()
 
   server.patch('/api/updateProfilePic/:userID', userController.updateProfile, (req, res) => {
     res.status(200).json('profile picture updated!');
+  })
+
+  server.post('/api/updatePassword/', userController.updatePassword, (req, res) => {
+    res.status(200).json('password updated!');
   })
 
   server.get('*', (req, res) => {

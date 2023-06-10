@@ -4,10 +4,7 @@ import styles from './Main.module.scss';
 
 export default function({user, hidden, signout}) {
   const router = useRouter();
-  const cards = [];
-  for (let i = 0; i < 10; i++) {
-    cards.push(<ClubCardProfile key={'profilecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
-  }
+  const clubs = [];
   return (
     <div style={{height: '90%', display: hidden ? 'none' : 'block'}} >
       <div className={styles.profile}>
@@ -18,7 +15,7 @@ export default function({user, hidden, signout}) {
         <div style={{alignSelf: 'flex-start', fontSize: '16px', margin: '0px 30px'}}>My Clubs</div>
       </div>
       <div className={styles.myClubsProfile}>
-        {cards}
+        {clubs.map(artist => <ClubCardProfile key={'homecard' + artist.id} artist={artist} />)}
       </div>
     </div>
   );

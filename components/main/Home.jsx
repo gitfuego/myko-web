@@ -5,10 +5,7 @@ import { useEffect } from 'react';
 
 export default function({user, hidden}) {
 
-  const cards = [];
-  for (let i = 0; i < 1; i++) {
-    cards.push(<ClubCardHome key={'homecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
-  }
+  const clubs = [];
 
   return (
     <div style={{height: '90%', display: hidden ? 'none' : 'block'}}>
@@ -25,7 +22,7 @@ export default function({user, hidden}) {
         </label>
       </header>
       <div className={styles.myClubsHome}>
-        {cards}
+        {clubs.map(artist => <ClubCardHome key={'homecard' + artist.id} artist={artist} />)}
       </div>
     </div>
   );

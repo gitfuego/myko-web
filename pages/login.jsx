@@ -2,11 +2,11 @@ import { useRouter } from 'next/router.js';
 import LIForm from '../components/login/LIForm.jsx';
 import LoginFailed from '../components/login/LoginFailed.jsx';
 import Phone from '../components/Phone.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function({ user, setUser }) {
   const router = useRouter();
-  const { loginFailed } = router.query;
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const checkCookie = () => {
     fetch('/api/login', {
@@ -33,8 +33,8 @@ export default function({ user, setUser }) {
 
   return (
     <Phone>
-      { loginFailed ? <LoginFailed /> : ''}
-      <LIForm user={user} setUser={setUser} />
+      { loginFailed ? <LoginFailed setLoginFailed={setLoginFailed} /> : ''}
+      <LIForm user={user} setUser={setUser} setLoginFailed={setLoginFailed} />
     </Phone>
   )
 }

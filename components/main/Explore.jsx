@@ -37,10 +37,6 @@ export default function({user, hidden, accessToken, initArtists }) {
     return () => cancel = true;
   }, [search, accessToken, initArtists])
 
-  const cards = [];
-  for (let i = 0; i < 20; i++) {
-    cards.push(<ClubCardExplore key={'explorecard' + i} artist={{name: 'Drake', src: '/drake.jpeg', href: '/home?artist=Drake'}} />);
-  }
   return (
     <div style={{height: '90%', display: hidden ? 'none' : 'block'}}>
       <header className={styles.header}>

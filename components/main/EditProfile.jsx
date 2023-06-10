@@ -6,7 +6,7 @@ export default function({ user, setUser }) {
   const router = useRouter();
 
   const [newPic, setNewPic] = useState(user?.profile_pic);
-  const [newUsername, setNewUsername] = useState(user.username);
+  const [newUsername, setNewUsername] = useState(user?.username);
   
   function changeImage(e) {
     const input = e.target;
@@ -40,8 +40,6 @@ export default function({ user, setUser }) {
   
       imageUrl = url.split('?')[0];
     }
-
-
 
     // update path in db
     fetch(`/api/updateProfilePic/${user.user_id}`, {

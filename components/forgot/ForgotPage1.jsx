@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import styles from '../form.module.scss';
 
-export default function({ formData, setFormData, nextPage, setUserFound }) {
+export default function({ formData, setFormData, nextPage }) {
   const router = useRouter();
 
   function handleNext() {
-    fetch('/api/sendCodeSU', {
+    fetch('/api/sendCodeFP', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,18 +14,14 @@ export default function({ formData, setFormData, nextPage, setUserFound }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.isRegistered) setUserFound(true);
-        else nextPage();
-      })
-      .catch(() => {
-        window.alert('Error: could not send code');
+        nextPage();
       })
   }
 
   return (
     <div className={styles.outer}>
       <button className={styles.back} type='button' onClick={() => router.back()}></button>
-      <h2 className={styles.heading}>Enter your phone number:</h2>
+      <h2 className={styles.heading}>Enter your phone number to reset your password:</h2>
       <div className={styles.container}>
         <input
         type='tel'

@@ -102,4 +102,40 @@ userController.updateProfile = (req, res, next) => {
     })
 }
 
+userController.updatePassword = async (req, res, next) => {
+  const { phoneNumber, password } = req.body;
+  const updatePasswordQuery = `UPDATE users SET password = $1 WHERE phone_number = $2;`
+  const hash = await bcrypt.hash(password, 10);
+  const values = [hash, phoneNumber];
+
+  db.query(updatePasswordQuery, values)
+    .then((data) => {
+      return next();
+    })
+    .catch(() => {
+      return next({
+        log: 'userController.updateProfile',
+        message: { err: 'error inside update profile controller' }
+      });
+    })
+}
+
+userController.checkIfRegistered = (req, res, next) => {
+  const { phoneNumber } = req.body;
+  const checkPhoneNumberQuery = `SELECT * FROM users WHERE phone_number = $1;`
+  const values = [phoneNumber];
+
+  db.query(checkPhoneNumberQuery, values)
+    .then((data) => {
+      res.locals.isRegistered = data.rows.length > 0;
+      return next();
+    })
+    .catch(() => {
+      return next({
+        log: 'userController.checkIfRegistered',
+        message: { err: 'error inside check if registered controller' }
+      });
+    })
+}
+
 module.exports = userController;

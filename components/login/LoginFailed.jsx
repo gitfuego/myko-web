@@ -1,13 +1,11 @@
-import { useRouter } from 'next/router';
 import styles from '../form.module.scss'
 
-export default function() {
-  const router = useRouter();
+export default function({ setLoginFailed }) {
 
   return (
     <div className={styles.popUpContainer}>
       <div className={styles.popUp}>
-        <button className={styles.x} onClick={() => router.push('/login')}></button>
+        <button className={styles.x} onClick={() => setLoginFailed(false)}></button>
         <div className={styles.msg}>Invalid login attempt. Please double check your credentials.</div>
       </div>
     </div>

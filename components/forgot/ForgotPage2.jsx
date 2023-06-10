@@ -2,6 +2,7 @@ import styles from '../form.module.scss';
 import { useEffect, useState } from 'react';
 
 export default function({ formData, nextPage, backPage, setVerifyFailed }) {
+
   function handleNext() {
     const code = [digit1, digit2, digit3, digit4].join('');
     fetch('/api/verifyPhone', {
