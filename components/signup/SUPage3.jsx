@@ -1,10 +1,8 @@
 import styles from '../form.module.scss';
 import ActiveLink from '../ActiveLink';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
 export default function({ formData, setFormData, setFailed, setSuccess }) {
-  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,7 +14,7 @@ export default function({ formData, setFormData, setFailed, setSuccess }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({...formData, phoneNumber: '+' + formData.phoneNumber.replace(/\D/g,'')}),
     })
     .then((response) => {
       setSuccess(true);
@@ -42,6 +40,7 @@ export default function({ formData, setFormData, setFailed, setSuccess }) {
             placeholder="Name"
             id='name'
             minLength={1}
+            maxLength={50}
             value={formData.name}
             onChange={(event) =>
               setFormData({ ...formData, name: event.target.value })
@@ -55,6 +54,7 @@ export default function({ formData, setFormData, setFailed, setSuccess }) {
             placeholder="Password"
             type={passwordVisible ? "text" : "password"}
             minLength={8}
+            maxLength={255}
             value={formData.password}
             onChange={(event) =>
               setFormData({ ...formData, password: event.target.value })

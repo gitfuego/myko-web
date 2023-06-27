@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import styles from '../form.module.scss'
 import ActiveLink from '../ActiveLink';
 
@@ -11,7 +13,8 @@ export default function LoginForm({ user, setUser, setLoginFailed }) {
 
   useEffect(() => {
     if (user !== null) router.push('/home');
-  })
+    else document.getElementById('phone-number').focus();
+  }, [])
 
 
   const handleSubmit = (event) => {
@@ -21,7 +24,7 @@ export default function LoginForm({ user, setUser, setLoginFailed }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ phoneNumber, password }),
+      body: JSON.stringify({ phoneNumber: '+' + phoneNumber.replace(/\D/g,''), password }),
     })
       .then((response) => {
         return response.json();
@@ -40,6 +43,10 @@ export default function LoginForm({ user, setUser, setLoginFailed }) {
   };
 
 
+  const handleChange = (value, country, e, formattedValue) => {
+    setPhoneNumber(formattedValue);
+  };
+
   return (
     <form onSubmit={handleSubmit} className={styles.container} style={{height: '60%'}}>
       <button className={styles.back} 
@@ -47,12 +54,16 @@ export default function LoginForm({ user, setUser, setLoginFailed }) {
       type='button'
       onClick={() => router.push('/') }></button>
       <h2>Welcome back!</h2>
-      <input
-        className={styles.inputField}
-        placeholder="Phone Number"
-        type='tel'
+      <PhoneInput
+        enableSearch
+        inputProps={{id: 'phone-number'}}
+        preferredCountries={['us']}
+        placeholder='Phone number'
+        containerClass={styles.inputField}
+        inputClass={styles.inputSub}
+        buttonStyle={{height: '65%', marginTop: '3%'}}
         value={phoneNumber}
-        onChange={(event) => setPhoneNumber(event.target.value.replace(/\D/g,'') )}
+        onChange={handleChange}
       />
       <input
         className={styles.inputField}

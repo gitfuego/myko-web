@@ -37,6 +37,7 @@
     "pg": "^8.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-phone-input-2": "^2.15.1",
     "sass": "^1.60.0",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",

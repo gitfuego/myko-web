@@ -64,11 +64,9 @@ userController.verifyUser = (req, res, next) => {
   db.query(verifyQuery, values)
     .then(data => {
       const passMatch = bcrypt.compareSync(password, data.rows[0].password);
-      console.log('i am passMatch: ', passMatch);
       if (passMatch) {
         res.locals.user = data.rows[0];
         delete res.locals.user.password;
-        console.log(res.locals.user);
         return next();
       } else {
         return next({
@@ -89,7 +87,7 @@ userController.updateProfile = (req, res, next) => {
   const { imageUrl, username } = req.body;
   const updatePicQuery = `UPDATE users SET profile_pic = $1, username = $2 WHERE user_id = $3;`
   const values = [imageUrl, username, userID];
-
+  
   db.query(updatePicQuery, values)
     .then((data) => {
       return next();
@@ -134,6 +132,61 @@ userController.checkIfRegistered = (req, res, next) => {
       return next({
         log: 'userController.checkIfRegistered',
         message: { err: 'error inside check if registered controller' }
+      });
+    })
+}
+
+userController.followArtist = (req, res, next) => {
+  const { userID, artistID } = req.body;
+  const checkPhoneNumberQuery = `INSERT INTO follows (user_id, artist_id)
+  VALUES ($1, $2) RETURNING *;`
+  const values = [userID, artistID];
+
+  db.query(checkPhoneNumberQuery, values)
+    .then((data) => {
+      if (data.rows[0]) return next();
+    })
+    .catch(() => {
+      return next({
+        log: 'userController.followArtist',
+        message: { err: 'error inside follow artist controller' }
+      });
+    })
+}
+
+userController.unfollowArtist = (req, res, next) => {
+  const { userID, artistID } = req.body;
+  const checkPhoneNumberQuery = `DELETE FROM follows 
+  WHERE user_id = $1 AND artist_id = $2 RETURNING *;`
+  const values = [userID, artistID];
+
+  db.query(checkPhoneNumberQuery, values)
+    .then((data) => {
+      if (data.rows[0]) return next();
+    })
+    .catch(() => {
+      return next({
+        log: 'userController.followArtist',
+        message: { err: 'error inside follow artist controller' }
+      });
+    })
+}
+
+userController.getFollowed = (req, res, next) => {
+  const {userID} = req.params;
+  const getFollowedQuery = `SELECT artist_id FROM follows 
+  WHERE user_id = $1;`
+  const values = [userID];
+
+  db.query(getFollowedQuery, values)
+    .then((data) => {
+      res.locals.followedArtists = data.rows;
+      return next();
+    })
+    .catch(() => {
+      return next({
+        log: 'userController.getFollowed',
+        message: { err: 'error inside get followed controller' }
       });
     })
 }

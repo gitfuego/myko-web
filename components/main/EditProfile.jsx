@@ -25,15 +25,25 @@ export default function({ user, setUser }) {
     
     const file = document.getElementById('profile-pic-upload').files[0];
     let imageUrl = user.profile_pic;
+
+    if (user.profile_pic) {
+      fetch(`/api/s3Object/${user.profile_pic.split('.com/')[1]}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        }
+      })
+    }
+    
     if (file) {
       // get url in s3 bucket from server endpoint
-      const { url } = await fetch('/api/s3Url').then(res => res.json())
+      const { url } = await fetch(`/api/s3Url/`).then(res => res.json())
       
       // post image to the s3 bucket
       await fetch(url, {
         method: "PUT",
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "image/*"
         },
         body: file
       })
@@ -42,7 +52,7 @@ export default function({ user, setUser }) {
     }
 
     // update path in db
-    fetch(`/api/updateProfilePic/${user.user_id}`, {
+    fetch(`/api/updateProfile/${user.user_id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -72,13 +82,15 @@ export default function({ user, setUser }) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor='profile-pic-upload' className={styles.piclabel}>
         <input id='profile-pic-upload' type='file' accept='image/*' onChange={(e) => changeImage(e)}/>
-        <div className={styles.image} style={{backgroundImage: `url(${newPic ?? '/profileicon.svg'})`}}></div>
+        <div className={styles.image} style={{backgroundImage: `url(${newPic ?? '/profilePlaceholder.svg'})`}}></div>
         <h5>Edit Profile Picture</h5>
         </label>
-        <label htmlFor='edit-username' className={styles.editUsername}>
+        <label htmlFor='edit-username'>
           <input id='edit-username' 
+          className={styles.editUsername}
           type='text' 
           placeholder='Name'
+          maxLength={50}
           value={newUsername} 
           onChange={(e) => setNewUsername(e.target.value)} />
           <h6>Edit Display Name</h6>

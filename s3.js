@@ -15,7 +15,18 @@ const s3 = new aws.S3({
 
 module.exports = {
   generateUploadURL: function() {
-    const imageName = `${Math.floor(Math.random() * 100)}${Date.now()}`;
+    function  generateRandomString(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      let result = '';
+    
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+    
+      return result;
+    }
+    const imageName = `${generateRandomString(8)}${Date.now()}`;
 
     const params = ({
       Bucket: bucketName,
@@ -25,5 +36,15 @@ module.exports = {
 
     const uploadURL = s3.getSignedUrl('putObject', params)
     return uploadURL
+  },
+
+  deletePicture: function(key) {
+    const params = ({
+      Bucket: bucketName,
+      Key: `${key}`,
+    })
+    s3.deleteObject(params, (err) => {
+      if (err) console.log(err);
+    });
   }
 }

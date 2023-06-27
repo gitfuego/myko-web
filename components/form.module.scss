@@ -54,7 +54,7 @@
   color: black;
 }
 
-.blackbtn {
+.blackbtn, .blackbtnDisabled {
   all: unset;
   color: white;
   font-family: CircularSTD, Arial, Helvetica, sans-serif;
@@ -66,8 +66,18 @@
   letter-spacing: 0.6px;
   width: 310px;
   height: 52px;
-  background: #242424;
   border-radius: 29px;
+}
+
+.blackbtnDisabled {
+  background: gray;
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.blackbtn {
+  background: #242424;
   &:hover {
     background-color: rgb(80, 80, 80);
     cursor: pointer;
@@ -86,12 +96,12 @@
   align-self: flex-start;
 }
 
-.inputField, .inputCode {
+.inputField, .inputCode, .inputSub {
   box-sizing: border-box;
-  background: #F3F5F7;
+  background: #F3F5F7 !important;
   border-radius: 30px;
-  border: none;
-  font-size: 16px;
+  border: none !important;
+  font-size: 16px !important;
   font-family: CircularSTD, Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
@@ -99,6 +109,10 @@
   &:focus {
     outline: none;
   }
+}
+
+.ccButton {
+  height: 60%;
 }
 
 .inputField {

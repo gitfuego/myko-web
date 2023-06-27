@@ -10,7 +10,7 @@ const spotifyApi = new SpotifyWebApi({
   clientId: "9ed4ae02c05d4296857b53d2397fee6a",
 })
 
-export default function({ user, artist, accessToken }) {
+export default function({ user, artist, accessToken, setUserArtistIDs, userArtistIDs }) {
   const router = useRouter();
   const [ artistData, setArtistData ] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,9 +56,9 @@ export default function({ user, artist, accessToken }) {
         <div className={styles.loadingSub}>
           <Loading />
         </div>
-      </div>):
-      isRegistered ? 
-      <Community artist={artist} user={user} artistData={artistData} /> : 
+      </div>) :
+      true ? 
+      <Community artist={artist} user={user} artistData={artistData} setUserArtistIDs={setUserArtistIDs} userArtistIDs={userArtistIDs} /> : 
       <Placeholder artist={artist} user={user} artistData={artistData} /> }
     </>
   );

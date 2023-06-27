@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import ActiveLink from "./ActiveLink";
 import styles from "./Header.module.scss";
-import { useEffect } from "react";
 
 export default function({ user, handleClick }) {
   const router = useRouter();
@@ -11,7 +10,7 @@ export default function({ user, handleClick }) {
       <div className={styles.topSub}></div>
       <div className={styles.topSub}>
         <ActiveLink href={'/'}>
-          <img src={!user ? "/mykoWhite.svg" : "/mykoGradient.svg"} />
+          <img src={"/mykoWhite.svg"} />
         </ActiveLink>
       </div>
       <div className={styles.topSub}>

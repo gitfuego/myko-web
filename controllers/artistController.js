@@ -62,13 +62,13 @@ artistController.checkRequest = async (req, res, next) => {
 artistController.checkIfRegistered = async (req, res, next) => {
   const { artistID } = req.params;
   console.log(artistID)
-  const getMessages = `SELECT *
+  const checkIfRegistered = `SELECT *
     FROM artists
     WHERE spotify_id = $1`;
   const values = [artistID];
 
   try {
-    const data = await db.query(getMessages, values);
+    const data = await db.query(checkIfRegistered, values);
     res.locals.isRegistered = data.rows.length > 0;
     return next();
   } catch (error) {

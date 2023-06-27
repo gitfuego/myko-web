@@ -1,11 +1,8 @@
-import { useRouter } from 'next/router';
 import ClubCardHome from './ClubCardHome';
 import styles from './Main.module.scss';
 import { useEffect } from 'react';
 
-export default function({user, hidden}) {
-
-  const clubs = [];
+export default function({user, hidden, userArtists}) {
 
   return (
     <div style={{height: '90%', display: hidden ? 'none' : 'block'}}>
@@ -22,7 +19,7 @@ export default function({user, hidden}) {
         </label>
       </header>
       <div className={styles.myClubsHome}>
-        {clubs.map(artist => <ClubCardHome key={'homecard' + artist.id} artist={artist} />)}
+        {userArtists.map(artist => <ClubCardHome key={'homecard' + artist.id} artist={artist} />)}
       </div>
     </div>
   );

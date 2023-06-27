@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 const PORT = 3000;
 const db = require('./models.js');
-const { generateUploadURL } = require('./s3.js');
+const { generateUploadURL, deletePicture } = require('./s3.js');
 
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
@@ -68,35 +68,78 @@ app.prepare()
       // Broadcast to other users in the room
       // socket.to(socket.room).emit('user left', `${socket.username} has left the room`);
     });
-  
+
+    socket.on('like', (likeData) => {
+      const {messageID, userID} = likeData;
+
+      const likeQuery = `INSERT INTO likes (message_id, user_id)
+      VALUES ($1, $2) RETURNING *`;
+      const values = [
+        messageID,
+        userID,
+      ];
+
+      db.query(likeQuery, values)
+      .then(() => {
+        io.to(socket.room).emit(`like:${messageID}`)
+      })
+        .catch(() => {
+          console.log('could not add like');
+      });
+
+    });
+
+    socket.on('unlike', (likeData) => {
+      const {messageID, userID} = likeData;
+
+      const unlikeQuery = `DELETE FROM likes
+      WHERE message_id = $1 AND user_id = $2`;
+      const values = [messageID, userID];
+
+      db.query(unlikeQuery, values)
+        .then(() => {
+          io.to(socket.room).emit(`unlike:${messageID}`)
+        })
+        .catch(() => {
+          console.log('could not remove like');
+      });
+
+    });
+
     socket.on('message', (msgData) => {
       const {
         message_text,
+        message_media,
         userID,
         artistID,
+        profile_pic,
       } = msgData;
 
-      const newMessage = `INSERT INTO messages (message_text, user_id, artist_id)
-      VALUES ($1, $2, $3) RETURNING *`;
+      const newMessage = `INSERT INTO messages (message_text, message_media, user_id, artist_id)
+      VALUES ($1, $2, $3, $4) RETURNING *`;
       const values = [
         message_text,
+        message_media,
         userID,
         artistID,
       ];
     
       db.query(newMessage, values)
         .then((data) => {
-          if (data.rows[0] !== undefined) {
-            console.log(data.rows[0]);
-          }
+          io.to(socket.room).emit('message', {
+            message_text: data.rows[0].message_text,
+            message_media: data.rows[0].message_media,
+            messageID: data.rows[0].message_id,
+            userID: data.rows[0].user_id,
+            artistID: data.rows[0].artist_id,
+            username: msgData.username,
+            profile_pic
+          });
         })
         .catch((err) => {
         console.log('error posting msg to db: ', err);
         });
       // Broadcast message to users in the room
-      io.to(socket.room).emit('message', {
-        ...msgData
-      });
     }); 
   });
 
@@ -180,8 +223,24 @@ app.prepare()
     }
   );
 
-  server.get('/api/messages/:artistID', messageController.getMessages, (req, res) => {
+  server.get('/api/messages/:artistID/:userID', messageController.getMessages, (req, res) => {
     res.json([...res.locals.messages]);
+  })
+
+  server.get('/api/loadMoreMessages/:artistID/:userID/:numMessagesShown', messageController.loadMoreMessages, (req, res) => {
+    res.json([...res.locals.messages]);
+  })
+
+  server.get('/api/getFollowed/:userID', userController.getFollowed, (req, res) => {
+    res.json([...res.locals.followedArtists]);
+  })
+
+  server.post('/api/followArtist', userController.followArtist, (req, res) => {
+    res.status(200).json('Artist followed successfully');
+  })
+
+  server.post('/api/unfollowArtist', userController.unfollowArtist, (req, res) => {
+    res.status(200).json('Artist unfollowed successfully');
   })
 
   server.post('/api/artistRequest', artistController.addRequest, (req, res) => {
@@ -203,7 +262,13 @@ app.prepare()
     res.json({url})
   });
 
-  server.patch('/api/updateProfilePic/:userID', userController.updateProfile, (req, res) => {
+  server.delete('/api/s3Object/:key', async (req, res) => {
+    const {key} = req.params;
+    deletePicture(key);
+    res.status(200).json('delete was successful');
+  })
+
+  server.patch('/api/updateProfile/:userID', userController.updateProfile, (req, res) => {
     res.status(200).json('profile picture updated!');
   })
 

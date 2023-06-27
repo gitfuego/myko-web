@@ -10,22 +10,45 @@ import { useRouter } from 'next/router.js';
 import ConnectToSpotify from '../components/main/ConnectToSpotify.jsx';
 import SpotifyWebApi from 'spotify-web-api-node';
 
+const spotifyApi = new SpotifyWebApi({
+  clientId: "9ed4ae02c05d4296857b53d2397fee6a",
+});
+
 
 export default function({ user, setUser, accessToken, setCode, signout }) {
   // state will be either home, explore, or profile
   const [ tab, changeTab ] = useState('explore');
   const router = useRouter();
   const { artist, editProfile } = router.query;
-  const spotifyApi = new SpotifyWebApi({
-      clientId: "9ed4ae02c05d4296857b53d2397fee6a",
-    });
 
   const [initArtists, setInitArtists] = useState([]);
+  const [userArtistIDs, setUserArtistIDs] = useState([]);
+  const [userArtists, setUserArtists] = useState([]);
+  
+
+  useEffect(() => {
+    if (user === null) router.push('/login');
+  })
+
+  useEffect(() => {
+    const authCode = new URLSearchParams(window.location.search).get('code');
+    setCode(authCode);
+   }, [])
 
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken)
-  }, [accessToken])
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (!user?.user_id) return;
+    fetch(`/api/getFollowed/${user.user_id}`)
+    .then((response) => response.json())
+    .then((artists) => {
+      setUserArtistIDs(artists.map((artist) => artist.artist_id));
+    })
+    .catch(() => console.log('could not fetch followed artists'))
+  }, [user])
 
   useEffect(() => {
     if (!accessToken) return;
@@ -58,22 +81,33 @@ export default function({ user, setUser, accessToken, setCode, signout }) {
       });
   }, [accessToken])
 
-
-  useEffect(() => {
-    const authCode = new URLSearchParams(window.location.search).get('code');
-    setCode(authCode);
-    if (user === null) router.push('/login');
-   }, [])
-   
+   useEffect(() => {
+    if (!accessToken || userArtistIDs.length < 1) return;
+    spotifyApi.getArtists([...userArtistIDs])
+    .then(res => {
+      setUserArtists(
+        res.body.artists.map(artist => {
+          return { 
+            id: artist.id,
+            src: artist.images[0]?.url,
+            name: artist.name,
+          };
+        })
+      )
+    })
+    .catch(err => {
+    console.log('Error retrieving user artists:', err);
+    });
+  }, [userArtistIDs, accessToken])
 
   return (
     <Phone>
       { !accessToken ? <ConnectToSpotify/> : ''}
-      { artist ? <Artist artist={artist} user={user} accessToken={accessToken}/> : '' }
+      { artist ? <Artist artist={artist} user={user} accessToken={accessToken} setUserArtistIDs={setUserArtistIDs} userArtistIDs={userArtistIDs}/> : '' }
       { editProfile ? <EditProfile user={user} setUser={setUser} /> : '' }
-      <Home key='home' user={user} hidden={tab !== 'home'} accessToken={accessToken}/>
+      <Home key='home' user={user} hidden={tab !== 'home'} accessToken={accessToken} userArtists={userArtists}/>
       <Explore key='explore' user={user} hidden={tab !== 'explore'} accessToken={accessToken} initArtists={initArtists}/>
-      <Profile key='profile' user={user} hidden={tab !== 'profile'} accessToken={accessToken} signout={signout}/>
+      <Profile key='profile' user={user} hidden={tab !== 'profile'} accessToken={accessToken} signout={signout} userArtists={userArtists}/>
       <Nav key='nav' tab={tab} changeTab={changeTab} />
     </Phone>
   )
