@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Head from 'next/head';
 
 export default function({ Component, pageProps }) {
   const router = useRouter();
@@ -64,10 +65,17 @@ export default function({ Component, pageProps }) {
     });
   }
   return (
-    <div id="background">
-      <Header key={'header'} user={user} handleClick={ user === null ? clickLogin : signout} setUser={setUser} />
-      <Component {...pageProps} user={user} setUser={setUser} accessToken={accessToken} setCode={setCode} signout={signout}/>
-      <Footer key={'footer'}/>
+    <div>
+      <Head>
+        <title>MYKO</title>
+        <meta name="description" content="This is the description of my page." />
+        <link rel='icon' href='/mykoGradient.svg' />
+      </Head>
+      <div id="background">
+        <Header key={'header'} user={user} handleClick={ user === null ? clickLogin : signout} setUser={setUser} />
+        <Component {...pageProps} user={user} setUser={setUser} accessToken={accessToken} setCode={setCode} signout={signout}/>
+        <Footer key={'footer'}/>
+      </div>
     </div>
   );
 }
